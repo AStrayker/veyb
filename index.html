@@ -25,13 +25,13 @@
     <main class="container">
         <!-- Карусель фото -->
         <div class="carousel-container">
-            <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+            <button class="carousel-btn prev" onclick="changeSlideGlobal(-1)">❮</button>
             <div class="carousel">
                 <img src="1.jpg" class="carousel-slide active" alt="Одноразка 1">
                 <img src="2.webp" class="carousel-slide" alt="Одноразка 2">
                 <img src="3.webp" class="carousel-slide" alt="Одноразка 3" class="carousel-slide" alt="Одноразка 4">
             </div>
-            <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+            <button class="carousel-btn next" onclick="changeSlideGlobal(1)">❯</button>
         </div>
 
         <!-- Продукт -->
@@ -42,13 +42,13 @@
             <div class="quantity">
                 <label>Кількість:</label>
                 <div class="qty-buttons">
-                    <button onclick="changeQty(-1)">−</button>
+                    <button onclick="changeQtyGlobal(-1)">−</button>
                     <input type="number" id="quantity" value="1" min="1">
-                    <button onclick="changeQty(1)">+</button>
+                    <button onclick="changeQtyGlobal(1)">+</button>
                 </div>
             </div>
             
-            <button class="buy-btn" onclick="showOrderForm()">🛒 Купити</button>
+            <button class="buy-btn" onclick="showOrderFormGlobal()">🛒 Купити</button>
         </div>
 
         <!-- Описание -->
@@ -85,12 +85,12 @@
     <!-- Форма заказа -->
     <div id="orderForm" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="hideOrderForm()">&times;</span>
+            <span class="close" onclick="hideOrderFormGlobal()">&times;</span>
             <h2>📋 Оформлення замовлення</h2>
             <form id="orderFormEl">
                 <div class="delivery-select">
                     <label>Спосіб доставки:</label>
-                    <select id="deliveryType" onchange="toggleDeliveryFields()">
+                    <select id="deliveryType" onchange="toggleDeliveryFieldsGlobal()">
                         <option value="nova">Нова Пошта</option>
                         <option value="ukr">Укр Пошта</option>
                     </select>
