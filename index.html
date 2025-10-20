@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Одноразка - Купити вейп</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка с дымом -->
+    <header class="header">
+        <div class="smoke-container">
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+        </div>
+        <h1 class="logo">Одноразка</h1>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Карусель фото -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+            <div class="carousel">
+                <img src="https://via.placeholder.com/400x400/FF6B6B/FFFFFF?text=Одноразка+1" class="carousel-slide active" alt="Одноразка 1">
+                <img src="https://via.placeholder.com/400x400/4ECDC4/FFFFFF?text=Одноразка+2" class="carousel-slide" alt="Одноразка 2">
+                <img src="https://via.placeholder.com/400x400/45B7D1/FFFFFF?text=Одноразка+3" class="carousel-slide" alt="Одноразка 3">
+                <img src="https://via.placeholder.com/400x400/96CEB4/FFFFFF?text=Одноразка+4" class="carousel-slide" alt="Одноразка 4">
+            </div>
+            <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+        </div>
+
+        <!-- Продукт -->
+        <div class="product">
+            <h2>Стильна Одноразка 600 затяжок</h2>
+            <div class="price">💎 299 грн</div>
+            
+            <div class="quantity">
+                <label>Кількість:</label>
+                <div class="qty-buttons">
+                    <button onclick="changeQty(-1)">−</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button onclick="changeQty(1)">+</button>
+                </div>
+            </div>
+            
+            <button class="buy-btn" onclick="showOrderForm()">🛒 Купити</button>
+        </div>
+
+        <!-- Описание -->
+        <div class="description">
+            <h3>📝 Короткий опис</h3>
+            <p>Потужна одноразка на 600 затяжок з насиченим смаком. Ідеальний вибір для цілого дня!</p>
+        </div>
+
+        <!-- Информация -->
+        <div class="info">
+            <h3>ℹ️ Інформація</h3>
+            <ul>
+                <li>Об'єм: 2мл</li>
+                <li>Затяжки: 600</li>
+                <li>Батарея: 500mAh</li>
+                <li>Смак: Фруктовий мікс</li>
+            </ul>
+        </div>
+
+        <!-- Доставка и оплата -->
+        <div class="delivery">
+            <h3>🚚 Доставка:</h3>
+            <p><strong>Нова Пошта</strong> - за тарифами перевізника</p>
+            <p><strong>Укр Пошта</strong> - <span class="free">Безкоштовна відправка</span></p>
+        </div>
+
+        <div class="payment">
+            <h3>💳 Оплата:</h3>
+            <p>На картку • IBAN • USDT</p>
+        </div>
+    </main>
+
+    <!-- Форма заказа -->
+    <div id="orderForm" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideOrderForm()">&times;</span>
+            <h2>📋 Оформлення замовлення</h2>
+            <form id="orderFormEl">
+                <div class="delivery-select">
+                    <label>Спосіб доставки:</label>
+                    <select id="deliveryType" onchange="toggleDeliveryFields()">
+                        <option value="nova">Нова Пошта</option>
+                        <option value="ukr">Укр Пошта</option>
+                    </select>
+                </div>
+
+                <!-- Индекс -->
+                <div class="form-group">
+                    <label>Індекс (необов'язково):</label>
+                    <input type="text" id="index" placeholder="Наприклад: 01001">
+                </div>
+
+                <!-- Населенный пункт -->
+                <div class="form-group">
+                    <label>Населений пункт:</label>
+                    <input type="text" id="city" placeholder="Місто/село" required>
+                </div>
+
+                <!-- Для Укр Пошта -->
+                <div id="streetFields">
+                    <div class="form-group">
+                        <label>Вулиця:</label>
+                        <input type="text" id="street" placeholder="Вулиця" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Будинок/Квартира:</label>
+                        <input type="text" id="house" placeholder="Наприклад: 10/5" required>
+                    </div>
+                </div>
+
+                <!-- Для Нова Пошта -->
+                <div id="branchSelect" style="display: none;">
+                    <div class="form-group">
+                        <label>Відділення Нова Пошта:</label>
+                        <select id="branch">
+                            <option value="">Оберіть відділення</option>
+                            <option value="відділення 1">відділення №1</option>
+                            <option value="відділення 2">відділення №2</option>
+                            <option value="відділення 3">відділення №3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Имя, фамилия, телефон -->
+                <div class="form-group">
+                    <label>Ім'я:</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Прізвище:</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Номер телефону:</label>
+                    <input type="tel" id="phone" placeholder="+380..." required>
+                </div>
+
+                <!-- Мессенджеры -->
+                <div class="form-group">
+                    <label>Для зв'язку:</label>
+                    <select id="messenger">
+                        <option value="Telegram">📱 Telegram</option>
+                        <option value="Viber">📱 Viber</option>
+                        <option value="WhatsApp">📱 WhatsApp</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">📤 Відправити замовлення</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
