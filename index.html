@@ -3,363 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuse</title>
-    <link rel="icon" type="ico.png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAnklEQVQ4T+3RMREAAADCoPdPbQ8HFAAAAOBnA8CXl/xfgAAAABJRU5ErkJggg==">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --text: #2D3436;
-            --light-bg: #F9F9F9;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
-
-        .header {
-            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header h1 {
-            font-family: 'Merriweather', serif;
-            font-size: 3.5rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        .smoke {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, 
-                rgba(255,255,255,0.2) 0%, 
-                rgba(255,255,255,0) 70%);
-            animation: smoke 3s infinite ease-in-out;
-        }
-
-        @keyframes smoke {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        .product-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .image-slider {
-            position: relative;
-            margin: 2rem 0;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .slider-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .slider-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .slider-dot.active {
-            background: white;
-        }
-
-        .product-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .price-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .price {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .quantity-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: var(--light-bg);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .buy-btn {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .buy-btn:hover {
-            background: #FF5252;
-        }
-
-        .details-section {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
-
-        .delivery-methods {
-            margin: 1.5rem 0;
-        }
-
-        .form-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin: 1.5rem 0;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .product-info {
-                grid-template-columns: 1fr;
-            }
-            
-            .slide {
-                height: 300px;
-            }
-            
-            .header h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+    <title>Vuse - Вершково-кремовий смак/1000 затяжок</title>
+    <link rel="icon" type="image/png" href="ico.png">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Шапка с дымом -->
     <header class="header">
-        <div class="smoke"></div>
-        <h1>Vuse</h1>
+        <div class="smoke-container">
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+        </div>
+        <h1 class="logo">Одноразка</h1>
     </header>
 
-    <div class="product-container">
-        <div class="image-slider">
-            <div class="slider-track">
-                <div class="slide" style="background-image: url('1.jpg')"></div>
-                <div class="slide" style="background-image: url('2.webp')"></div>
-                <div class="slide" style="background-image: url('3.webp')"></div>
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Карусель фото -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+            <div class="carousel">
+                <img src="1.jpg" class="carousel-slide active" alt="Одноразка 1">
+                <img src="2.webp" class="carousel-slide" alt="Одноразка 2">
+                <img src="3.webp" class="carousel-slide" alt="Одноразка 3" class="carousel-slide" alt="Одноразка 4">
             </div>
-            <div class="slider-controls">
-                <div class="slider-dot active" onclick="slide(0)"></div>
-                <div class="slider-dot" onclick="slide(1)"></div>
-                <div class="slider-dot" onclick="slide(2)"></div>
-            </div>
+            <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
         </div>
 
-        <div class="product-info">
-            <div class="price-section">
-                <h2>Vuse - Вершково-кремовий смак/1000 затяжок</h2>
-                <div class="price">₴250.00</div>
-                <div class="quantity-selector">
-                    <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
-                    <span id="quantity">1</span>
-                    <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+        <!-- Продукт -->
+        <div class="product">
+            <h2>Vuse - Вершково-кремовий смак/1000 затяжок</h2>
+            <div class="price">💎 250 грн</div>
+            
+            <div class="quantity">
+                <label>Кількість:</label>
+                <div class="qty-buttons">
+                    <button onclick="changeQty(-1)">−</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button onclick="changeQty(1)">+</button>
                 </div>
-                <button class="buy-btn">Купити</button>
             </div>
-            <div class="details-section">
-                <h3>Короткий опис</h3>
-                <p>Vuse GO 1000 – це пристрій з керамічним нагрівальним елементом, насиченим смаком та вбудованим акумулятором, що не потребує підзарядки. Об'єм рідини для вейпу становить 2 мл.
-Концентрація нікотину: 20 мг/мл.</p>
-                
-                <h3>Інформація</h3>
-                <ul>
-                    <li>Матеріал: керамыка89</li>
-                    <li>Колір: Коричнивий</li>
-                    <li>Країна виробник: США</li>
-                </ul>
-            </div>
+            
+            <button class="buy-btn" onclick="showOrderForm()">🛒 Купити</button>
         </div>
 
-        <div class="form-section">
-            <h3>Доставка:</h3>
-            <div class="delivery-methods">
-                <p>Нова Пошта - за тарифами перевізника</p>
-                <p>Укр Пошта - Безкоштовна відправка</p>
-            </div>
+        <!-- Описание -->
+        <div class="description">
+            <h3>📝 Короткий опис</h3>
+            <p>Vuse GO 1000 – це пристрій з керамічним нагрівальним елементом, насиченим смаком та вбудованим акумулятором, що не потребує підзарядки. Об'єм рідини для вейпу становить 2 мл.
+Концентрація нікотину: 20 мг/мл.</p>
+        </div>
 
-            <form id="orderForm" action="mailto:astrajker@gmail.com" method="post" enctype="text/plain">
-                <div class="form-group">
+        <!-- Информация -->
+        <div class="info">
+            <h3>ℹ️ Інформація</h3>
+            <ul>
+                <li>Об'єм: 20мл</li>
+                <li>Затяжки: 1000</li>
+                <li>Батарея: 300mAh</li>
+                <li>Смак: Вершково-кремовий смак</li>
+            </ul>
+        </div>
+
+        <!-- Доставка и оплата -->
+        <div class="delivery">
+            <h3>🚚 Доставка:</h3>
+            <p><strong>Нова Пошта</strong> - за тарифами перевізника</p>
+            <p><strong>Укр Пошта</strong> - <span class="free">Безкоштовна відправка</span></p>
+        </div>
+
+        <div class="payment">
+            <h3>💳 Оплата:</h3>
+            <p>На картку • IBAN • USDT</p>
+        </div>
+    </main>
+
+    <!-- Форма заказа -->
+    <div id="orderForm" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideOrderForm()">&times;</span>
+            <h2>📋 Оформлення замовлення</h2>
+            <form id="orderFormEl">
+                <div class="delivery-select">
                     <label>Спосіб доставки:</label>
-                    <select id="deliveryMethod" onchange="toggleDeliveryFields()">
+                    <select id="deliveryType" onchange="toggleDeliveryFields()">
                         <option value="nova">Нова Пошта</option>
                         <option value="ukr">Укр Пошта</option>
                     </select>
                 </div>
 
-                <div id="novaFields">
+                <!-- Индекс -->
+                <div class="form-group">
+                    <label>Індекс (необов'язково):</label>
+                    <input type="text" id="index" placeholder="Наприклад: 01001">
+                </div>
+
+                <!-- Населенный пункт -->
+                <div class="form-group">
+                    <label>Населений пункт:</label>
+                    <input type="text" id="city" placeholder="Місто/село" required>
+                </div>
+
+                <!-- Для Укр Пошта -->
+                <div id="streetFields">
                     <div class="form-group">
-                        <label>Індекс (необов'язково):</label>
-                        <input type="text">
+                        <label>Вулиця:</label>
+                        <input type="text" id="street" placeholder="Вулиця" required>
                     </div>
                     <div class="form-group">
-                        <label>Відділення Нової Пошти:</label>
-                        <select>
-                            <option>Відділення 1</option>
-                            <option>Відділення 2</option>
-                            <option>Відділення 3</option>
+                        <label>Будинок/Квартира:</label>
+                        <input type="text" id="house" placeholder="Наприклад: 10/5" required>
+                    </div>
+                </div>
+
+                <!-- Для Нова Пошта -->
+                <div id="branchSelect" style="display: none;">
+                    <div class="form-group">
+                        <label>Відділення Нова Пошта:</label>
+                        <select id="branch">
+                            <option value="">Оберіть відділення</option>
+                            <option value="відділення 1">відділення №1</option>
+                            <option value="відділення 2">відділення №2</option>
+                            <option value="відділення 3">відділення №3</option>
                         </select>
                     </div>
                 </div>
 
-                <div id="ukrFields" class="hidden">
-                    <div class="form-group">
-                        <label>Індекс:</label>
-                        <input type="text">
-                    </div>
-                    <div class="form-group">
-                        <label>Населений пункт:</label>
-                        <input type="text">
-                    </div>
-                    <div class="form-group">
-                        <label>Вулиця:</label>
-                        <input type="text">
-                    </div>
-                    <div class="form-group">
-                        <label>Будинок/Квартира:</label>
-                        <input type="text">
-                    </div>
-                </div>
-
+                <!-- Имя, фамилия, телефон -->
                 <div class="form-group">
                     <label>Ім'я:</label>
-                    <input type="text" required>
+                    <input type="text" id="firstName" required>
                 </div>
-
                 <div class="form-group">
                     <label>Прізвище:</label>
-                    <input type="text" required>
+                    <input type="text" id="lastName" required>
                 </div>
-
                 <div class="form-group">
                     <label>Номер телефону:</label>
-                    <input type="tel" required>
+                    <input type="tel" id="phone" placeholder="+380..." required>
                 </div>
 
+                <!-- Мессенджеры -->
                 <div class="form-group">
-                    <label>Спосіб зв'язку:</label>
-                    <select>
-                        <option>Telegram</option>
-                        <option>Viber</option>
-                        <option>Whatsapp</option>
+                    <label>Для зв'язку:</label>
+                    <select id="messenger">
+                        <option value="Telegram">📱 Telegram</option>
+                        <option value="Viber">📱 Viber</option>
+                        <option value="WhatsApp">📱 WhatsApp</option>
                     </select>
                 </div>
 
-                <button type="submit" class="buy-btn">Відправити</button>
+                <button type="submit" class="submit-btn">📤 Відправити замовлення</button>
             </form>
         </div>
     </div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelector('.slider-track');
-        const dots = document.querySelectorAll('.slider-dot');
-
-        function slide(index) {
-            currentSlide = index;
-            slides.style.transform = `translateX(-${index * 100}%)`;
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
-        }
-
-        function changeQuantity(change) {
-            const quantity = document.getElementById('quantity');
-            let value = parseInt(quantity.textContent);
-            value = Math.max(1, value + change);
-            quantity.textContent = value;
-        }
-
-        function toggleDeliveryFields() {
-            const method = document.getElementById('deliveryMethod').value;
-            document.getElementById('novaFields').classList.toggle('hidden', method === 'ukr');
-            document.getElementById('ukrFields').classList.toggle('hidden', method === 'nova');
-        }
-
-        // Initialize form visibility
-        toggleDeliveryFields();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
