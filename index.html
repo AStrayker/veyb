@@ -509,103 +509,83 @@
     </section>
 
 
-<!-- Форма замовлення -->
-<div class="order-form" id="orderForm">
-    <div class="container">
-        <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
+    <!-- Форма замовлення -->
+    <div class="order-form" id="orderForm">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
+            <form id="orderFormElement">
+                <div class="form-group quantity">
+                    <button type="button" id="dec">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
+                    <button type="button" id="inc">+</button>
+                    <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
+                </div>
 
-        <!-- Повідомлення -->
-        <div id="formMessage" class="form-message" style="display:none;"></div>
-
-        <form 
-            action="https://formspree.io/f/xwpwlnkz" 
-            method="POST" 
-            onsubmit="return handleSubmit(this)"
-        >
-            <div class="form-group quantity">
-                <button type="button" id="dec">-</button>
-                <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
-                <button type="button" id="inc">+</button>
-                <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
-            </div>
-
-            <div class="form-group">
-                <label>Ім'я *</label>
-                <input type="text" name="Ім'я" required />
-            </div>
-            <div class="form-group">
-                <label>Прізвище *</label>
-                <input type="text" name="Прізвище" required />
-            </div>
-            <div class="form-group">
-                <label>Номер телефону *</label>
-                <input type="tel" name="Телефон" required />
-            </div>
-
-            <div class="form-group">
-                <label>Доставка *</label>
-                <select name="Доставка" id="delivery" required>
-                    <option value="">Оберіть спосіб</option>
-                    <option value="Нова Пошта">Нова Пошта</option>
-                    <option value="Укрпошта">Укрпошта</option>
-                </select>
-            </div>
-
-            <!-- Нова Пошта -->
-            <div class="dynamic-fields" id="novaFields">
                 <div class="form-group">
-                    <label>Населений пункт</label>
-                    <input type="text" name="Місто (Нова Пошта)" />
+                    <label>Ім'я *</label>
+                    <input type="text" name="name" required />
                 </div>
                 <div class="form-group">
-                    <label>Номер відділення</label>
-                    <input type="text" name="Відділення (Нова Пошта)" />
-                </div>
-            </div>
-
-            <!-- Укрпошта -->
-            <div class="dynamic-fields" id="ukrFields">
-                <div class="form-group">
-                    <label>Населений пункт</label>
-                    <input type="text" name="Місто (Укрпошта)" />
+                    <label>Прізвище *</label>
+                    <input type="text" name="surname" required />
                 </div>
                 <div class="form-group">
-                    <label>Індекс</label>
-                    <input type="text" name="Індекс (Укрпошта)" />
+                    <label>Номер телефону *</label>
+                    <input type="tel" name="phone" required />
                 </div>
+
                 <div class="form-group">
-                    <label>Адреса відділення</label>
-                    <input type="text" name="Адреса (Укрпошта)" />
+                    <label>Доставка *</label>
+                    <select name="delivery" id="delivery" required>
+                        <option value="">Оберіть спосіб</option>
+                        <option value="nova">Нова Пошта</option>
+                        <option value="ukr">Укрпошта</option>
+                    </select>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>Оплата *</label>
-                <select name="Оплата" required>
-                    <option value="">Оберіть спосіб</option>
-                    <option value="На карту">На карту</option>
-                    <option value="IBAN">IBAN</option>
-                    <option value="USDT">USDT</option>
-                    <option value="Binance Pay">Binance Pay</option>
-                    <option value="Bybit Pay">Bybit Pay</option>
-                    <option value="OKX Pay">OKX Pay</option>
-                </select>
-            </div>
+                <!-- ПОЛЯ АДРЕСИ — ЗАВЖДИ ВИДИМІ -->
+                <div class="address-fields">
+                    <h4 style="margin-bottom: 15px; color: #d4a373;">Адреса доставки</h4>
+                    <div class="form-group">
+                        <label>Населений пункт</label>
+                        <input type="text" name="city" placeholder="Наприклад: Київ" />
+                    </div>
+                    <div class="form-group">
+                        <label>Відділення / Індекс</label>
+                        <input type="text" name="branch" placeholder="Наприклад: №15 або 01001" />
+                    </div>
+                    <div class="form-group">
+                        <label>Вулиця</label>
+                        <input type="text" name="street" placeholder="Наприклад: Хрещатик" />
+                    </div>
+                    <div class="form-group">
+                        <label>Будинок / Квартира</label>
+                        <input type="text" name="house" placeholder="Наприклад: 25, кв. 12" />
+                    </div>
+                </div>
 
-            <div class="total-price" id="totalPrice">Сума: 250 грн</div>
+                <div class="form-group">
+                    <label>Оплата *</label>
+                    <select name="payment" required>
+                        <option value="">Оберіть спосіб</option>
+                        <option value="card">На карту</option>
+                        <option value="iban">IBAN</option>
+                        <option value="usdt">USDT</option>
+                        <option value="binance">Binance Pay</option>
+                        <option value="bybit">Bybit Pay</option>
+                        <option value="okx">OKX Pay</option>
+                    </select>
+                </div>
 
-            <!-- Приховані поля -->
-            <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
-            <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-            <input type="hidden" name="_next" value="thanks.html" />
+                <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-            <button type="submit" class="submit-btn">
-                <span class="btn-text">Відправити замовлення</span>
-                <span class="btn-loading" style="display:none;">Відправка...</span>
-            </button>
-        </form>
+                <button type="submit" class="submit-btn">Відправити замовлення</button>
+                <div class="success-message" id="successMessage">
+                    Дякуємо! Ваше замовлення отримано. Ми зв'яжемося з вами.
+                </div>
+            </form>
+        </div>
     </div>
-</div>
     
     <!-- Контакти -->
     <section id="contact">
