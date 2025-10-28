@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -22,59 +22,39 @@
 
         /* Хедер */
         header {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
         .logo { font-weight: 700; font-size: 1.4rem; color: #d4a373; }
         .burger { display: none; font-size: 1.8rem; cursor: pointer; color: #d4a373; }
 
         /* Мобільне меню */
         .mobile-menu {
-            position: fixed;
-            top: 0; right: -100%;
-            width: 280px; height: 100vh;
-            background: #fff;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+            background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             transition: right 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 999;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
+            z-index: 999; padding: 80px 20px 20px; overflow-y: auto;
         }
         .mobile-menu.open { right: 0; }
         .mobile-menu ul { list-style: none; }
         .mobile-menu li { margin-bottom: 20px; }
         .mobile-menu a {
-            display: block; padding: 12px 0;
-            font-weight: 500; font-size: 1.1rem;
-            color: #333; border-bottom: 1px solid #eee;
-            transition: color 0.3s;
+            display: block; padding: 12px 0; font-weight: 500; font-size: 1.1rem;
+            color: #333; border-bottom: 1px solid #eee; transition: color 0.3s;
         }
         .mobile-menu a:hover { color: #d4a373; }
 
         .overlay {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 998;
-            opacity: 0; visibility: hidden;
-            transition: all 0.3s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 998;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
         }
         .overlay.active { opacity: 1; visibility: visible; }
 
         /* Hero */
-        .hero {
-            padding-top: 80px; text-align: center; padding-bottom: 60px;
+        .hero { padding-top: 80px; text-align: center; padding-bottom: 60px;
             background: linear-gradient(135deg, #fffaf0 0%, #f5f5f5 100%);
         }
         .hero h1 { font-size: 2.2rem; margin-bottom: 15px; color: #333; }
@@ -173,7 +153,7 @@
             font-size: 1.2rem; font-weight: 600;
         }
         .dynamic-fields { display: none; margin-top: 15px; }
-        .dynamic-fields.active { display: block; }
+        .dynamic-fields.active { display: block; animation: fadeIn 0.4s; }
         .total-price {
             font-size: 1.3rem; font-weight: 600; text-align: center;
             margin: 25px 0; color: #d4a373;
@@ -190,7 +170,7 @@
             padding: 15px; border-radius: 8px; text-align: center;
             margin-top: 20px; border: 1px solid #c3e6cb;
         }
-        .success-message.active { display: block; }
+        .success-message.active { display: block; animation: fadeIn 0.5s; }
 
         /* Контакти */
         .contacts { text-align: center; max-width: 500px; margin: 0 auto; }
@@ -210,7 +190,8 @@
         /* Футер */
         footer { background: #333; color: #ccc; text-align: center; padding: 30px 20px; font-size: 0.9rem; }
 
-        /* Мобільні стилі */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         @media (max-width: 768px) {
             .burger { display: block; }
             .hero h1 { font-size: 1.8rem; }
@@ -408,14 +389,9 @@
         </div>
     </footer>
 
-    <!-- ВИПРАВЛЕНИЙ JavaScript -->
-    <script>
+    <!-- JavaScript з defer -->
+    <script defer>
         document.addEventListener('DOMContentLoaded', () => {
-            // === Елементи ===
-            const burger = document.getElementById('burger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('overlay');
-            const navLinks = document.querySelectorAll('.nav-link');
             const openFormBtn = document.getElementById('openForm');
             const orderForm = document.getElementById('orderForm');
             const quantityInput = document.getElementById('quantity');
@@ -430,31 +406,29 @@
 
             const PRICE_PER_ITEM = 250;
 
-            // === Відкриття форми ===
+            // Відкриття форми
             openFormBtn.addEventListener('click', () => {
                 orderForm.classList.add('active');
                 orderForm.scrollIntoView({ behavior: 'smooth' });
             });
 
-            // === Кількість ===
+            // Кількість
             incBtn.addEventListener('click', () => {
                 quantityInput.value = parseInt(quantityInput.value) + 1;
                 updateTotal();
             });
-
             decBtn.addEventListener('click', () => {
                 if (quantityInput.value > 1) {
                     quantityInput.value = parseInt(quantityInput.value) - 1;
                     updateTotal();
                 }
             });
-
             const updateTotal = () => {
                 const qty = parseInt(quantityInput.value) || 1;
                 totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
             };
 
-            // === ПОЛЯ ДОСТАВКИ (ВИПРАВЛЕНО!) ===
+            // ПОЛЯ ДОСТАВКИ — ПРАЦЮЄ!
             deliverySelect.addEventListener('change', () => {
                 novaFields.classList.remove('active');
                 ukrFields.classList.remove('active');
@@ -465,7 +439,7 @@
                 }
             });
 
-            // === Відправка форми ===
+            // Відправка форми
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const formData = new FormData(form);
@@ -474,12 +448,11 @@
                 data.total = `${parseInt(data.quantity) * 250} грн`;
 
                 try {
-                    const response = await fetch('https://formspree.io/f/xwpwlnkz', {
+                    const response = await fetch('https://formspree.io/f/mbljklpw', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
-
                     if (response.ok) {
                         successMessage.classList.add('active');
                         form.reset();
@@ -489,73 +462,14 @@
                         ukrFields.classList.remove('active');
                         deliverySelect.value = '';
                     } else {
-                        alert('Помилка відправки. Спробуйте ще раз.');
+                        alert('Помилка. Спробуйте ще.');
                     }
-                } catch (err) {
-                    alert('Помилка мережі. Перевірте підключення.');
+                } catch {
+                    alert('Помилка мережі.');
                 }
             });
 
-            // === Ініціалізація ===
             updateTotal();
-
-            // === Мобільне меню ===
-            burger.addEventListener('click', () => {
-                mobileMenu.classList.toggle('open');
-                overlay.classList.toggle('active');
-            });
-
-            overlay.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                    overlay.classList.remove('active');
-                });
-            });
-
-            // === Плавний скрол ===
-            navLinks.forEach(link => {
-                link.addEventListener('click', e => {
-                    e.preventDefault();
-                    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-
-            // === Карусель ===
-            const carouselInner = document.getElementById('carouselInner');
-            const prevBtn = document.getElementById('prev');
-            const nextBtn = document.getElementById('next');
-            let currentIndex = 0;
-            const items = document.querySelectorAll('.carousel-item');
-            const totalItems = items.length;
-
-            const updateCarousel = () => {
-                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-            };
-
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                updateCarousel();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % totalItems;
-                updateCarousel();
-            });
-
-            let carouselStartX = 0;
-            const carousel = document.getElementById('carousel');
-            carousel.addEventListener('touchstart', e => carouselStartX = e.touches[0].clientX, { passive: true });
-            carousel.addEventListener('touchend', e => {
-                if (!carouselStartX) return;
-                const diff = carouselStartX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) diff > 0 ? nextBtn.click() : prevBtn.click();
-                carouselStartX = 0;
-            }, { passive: true });
         });
     </script>
 </body>
