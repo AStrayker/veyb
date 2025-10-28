@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9fb;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Montserrat', sans-serif; background: #f9f9fb; color: #333; line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Хедер */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
@@ -28,7 +21,6 @@
         .logo { font-weight: 700; font-size: 1.4rem; color: #d4a373; }
         .burger { display: none; font-size: 1.8rem; cursor: pointer; color: #d4a373; }
 
-        /* Мобільне меню */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
             background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
@@ -51,13 +43,11 @@
         }
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* Hero */
         .hero { padding-top: 80px; text-align: center; padding-bottom: 60px;
             background: linear-gradient(135deg, #fffaf0 0%, #f5f5f5 100%); }
         .hero h1 { font-size: 2.2rem; margin-bottom: 15px; color: #333; }
         .hero p { font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto 30px; }
 
-        /* Карусель */
         .carousel {
             position: relative; max-width: 400px; margin: 40px auto;
             overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -76,7 +66,6 @@
         .prev { left: 15px; }
         .next { right: 15px; }
 
-        /* Секції */
         section { padding: 80px 0; }
         .section-title {
             text-align: center; font-size: 2rem; margin-bottom: 40px;
@@ -87,7 +76,6 @@
             display: block; margin: 15px auto 0; border-radius: 2px;
         }
 
-        /* Ціна */
         .price-section {
             background: #fff; border-radius: 16px; padding: 40px;
             max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -105,10 +93,8 @@
             box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
         }
 
-        /* Опис */
         .description { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #555; }
 
-        /* Доставка */
         .info-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px; max-width: 1000px; margin: 0 auto;
@@ -119,12 +105,13 @@
         }
         .info-card h3 { color: #d4a373; margin-bottom: 15px; font-size: 1.4rem; }
 
-        /* Форма */
+        /* ФОРМА ПОЧАТКОВО ПРИХОВАНА */
         .order-form {
-            background: white; padding: 40px;
+            display: none; background: white; padding: 40px;
             border-radius: 16px; max-width: 600px; margin: 40px auto;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
+
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
         input, select {
@@ -165,7 +152,6 @@
         }
         .success-message.active { display: block; }
 
-        /* Контакти */
         .contacts { text-align: center; max-width: 500px; margin: 0 auto; }
         .contact-btns {
             display: flex; justify-content: center; gap: 20px;
@@ -180,7 +166,6 @@
         .contact-btn:hover { background: #d4a373; color: white; transform: translateY(-3px); }
         .contact-btn i { font-size: 1.3rem; }
 
-        /* Футер */
         footer { background: #333; color: #ccc; text-align: center; padding: 30px 20px; font-size: 0.9rem; }
 
         @media (max-width: 768px) {
@@ -381,84 +366,87 @@
     </footer>
 
     <script>
-        // Чекаємо DOM
         document.addEventListener('DOMContentLoaded', () => {
-            const quantityInput = document.getElementById('quantity');
-            const incBtn = document.getElementById('inc');
-            const decBtn = document.getElementById('dec');
-            const totalPriceEl = document.getElementById('totalPrice');
-            const deliverySelect = document.getElementById('delivery');
-            const novaFields = document.getElementById('novaFields');
-            const ukrFields = document.getElementById('ukrFields');
-            const form = document.getElementById('orderFormElement');
-            const successMessage = document.getElementById('successMessage');
+            const openFormBtn = document.getElementById('openForm');
+            const orderForm = document.getElementById('orderForm');
 
-            const PRICE_PER_ITEM = 250;
+            // ВІДКРИВАЄМО ФОРМУ ТА ІНІЦІАЛІЗУЄМО JS
+            openFormBtn.addEventListener('click', () => {
+                orderForm.style.display = 'block';
+                orderForm.scrollIntoView({ behavior: 'smooth' });
 
-            // Кількість
-            incBtn.onclick = () => {
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-                updateTotal();
-            };
-            decBtn.onclick = () => {
-                if (quantityInput.value > 1) {
-                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                // === ІНІЦІАЛІЗАЦІЯ ФОРМИ (ТІЛЬКИ ПІСЛЯ ВІДКРИТТЯ) ===
+                const quantityInput = document.getElementById('quantity');
+                const incBtn = document.getElementById('inc');
+                const decBtn = document.getElementById('dec');
+                const totalPriceEl = document.getElementById('totalPrice');
+                const deliverySelect = document.getElementById('delivery');
+                const novaFields = document.getElementById('novaFields');
+                const ukrFields = document.getElementById('ukrFields');
+                const form = document.getElementById('orderFormElement');
+                const successMessage = document.getElementById('successMessage');
+
+                const PRICE_PER_ITEM = 250;
+
+                // Кількість
+                incBtn.onclick = () => {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
                     updateTotal();
-                }
-            };
-
-            function updateTotal() {
-                const qty = parseInt(quantityInput.value) || 1;
-                totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
-            }
-
-            // ПОЛЯ ДОСТАВКИ
-            deliverySelect.onchange = () => {
-                novaFields.style.display = 'none';
-                ukrFields.style.display = 'none';
-                if (deliverySelect.value === 'nova') {
-                    novaFields.style.display = 'block';
-                } else if (deliverySelect.value === 'ukr') {
-                    ukrFields.style.display = 'block';
-                }
-            };
-
-            // Відправка
-            form.onsubmit = async (e) => {
-                e.preventDefault();
-                const data = Object.fromEntries(new FormData(form));
-                data.product = "Vuse Go 1000 Creamy Tobacco";
-                data.total = `${parseInt(data.quantity) * 250} грн`;
-
-                try {
-                    const res = await fetch('https://formspree.io/f/xwpwlnkz', {  // Замініть на ваш ID
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                    if (res.ok) {
-                        successMessage.style.display = 'block';
-                        form.reset();
-                        quantityInput.value = 1;
+                };
+                decBtn.onclick = () => {
+                    if (quantityInput.value > 1) {
+                        quantityInput.value = parseInt(quantityInput.value) - 1;
                         updateTotal();
-                        novaFields.style.display = 'none';
-                        ukrFields.style.display = 'none';
-                        deliverySelect.value = '';
                     }
-                } catch (err) {
-                    alert('Помилка. Спробуйте ще раз.');
+                };
+
+                function updateTotal() {
+                    const qty = parseInt(quantityInput.value) || 1;
+                    totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
                 }
-            };
 
-            updateTotal();
+                // ПОЛЯ ДОСТАВКИ — ТЕПЕР ПРАЦЮЄ!
+                deliverySelect.onchange = () => {
+                    novaFields.style.display = 'none';
+                    ukrFields.style.display = 'none';
+                    if (deliverySelect.value === 'nova') {
+                        novaFields.style.display = 'block';
+                    } else if (deliverySelect.value === 'ukr') {
+                        ukrFields.style.display = 'block';
+                    }
+                };
 
-            // Відкриття форми
-            document.getElementById('openForm').onclick = () => {
-                document.getElementById('orderForm').style.display = 'block';
-                document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
-            };
+                // Відправка
+                form.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const data = Object.fromEntries(new FormData(form));
+                    data.product = "Vuse Go 1000 Creamy Tobacco";
+                    data.total = `${parseInt(data.quantity) * 250} грн`;
 
-            // Мобільне меню
+                    try {
+                        const res = await fetch('https://formspree.io/f/xwpwlnkz', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+                        if (res.ok) {
+                            successMessage.style.display = 'block';
+                            form.reset();
+                            quantityInput.value = 1;
+                            updateTotal();
+                            novaFields.style.display = 'none';
+                            ukrFields.style.display = 'none';
+                            deliverySelect.value = '';
+                        }
+                    } catch (err) {
+                        alert('Помилка. Спробуйте ще раз.');
+                    }
+                };
+
+                updateTotal();
+            });
+
+            // === Мобільне меню ===
             const burger = document.getElementById('burger');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
@@ -478,7 +466,7 @@
                 document.querySelector(l.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
 
-            // Карусель
+            // === Карусель ===
             const carouselInner = document.getElementById('carouselInner');
             const prevBtn = document.getElementById('prev');
             const nextBtn = document.getElementById('next');
