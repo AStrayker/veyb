@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* === Основні стилі === */
+        /* === Основні стилі === (залишаємо як є) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -328,6 +328,17 @@
             transform: translateY(-2px);
         }
 
+        /* === Повідомлення про статус === */
+        .form-message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+        .form-message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .form-message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
         /* === Контакти === */
         .contacts {
             text-align: center;
@@ -411,7 +422,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">Vuse Go 1000</div>
-            <div class="burger" id="burger">Menu</div>
+            <div class="burger" id="burger">☰</div>
         </div>
     </header>
 
@@ -435,8 +446,8 @@
 
             <!-- Карусель -->
             <div class="carousel" id="carousel">
-                <button class="carousel-btn prev" id="prev">Left Arrow</button>
-                <button class="carousel-btn next" id="next">Right Arrow</button>
+                <button class="carousel-btn prev" id="prev">‹</button>
+                <button class="carousel-btn next" id="next">›</button>
                 <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
                         <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse Go 1000" />
@@ -498,7 +509,9 @@
     <div class="order-form" id="orderForm">
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
-            <form id="orderSubmitForm" action="https://formsubmit.co/3804630@ukr.net" method="POST">
+            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
+                <div id="formMessage" class="form-message"></div> <!-- Додано для статусів -->
+
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
@@ -572,7 +585,7 @@
                 <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
                 <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
+                <!-- Видалено _next для тестів; додайте назад, якщо потрібно: <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" /> -->
 
                 <button type="submit" class="submit-btn">Відправити замовлення</button>
             </form>
@@ -603,12 +616,12 @@
     <!-- Футер -->
     <footer>
         <div class="container">
-            <p>© 2025 Vuse Go 1000. Всі права захищені.</p>
+            <p>&copy; 2025 Vuse Go 1000. Всі права захищені.</p>
         </div>
     </footer>
 
     <script>
-        // === Мобільне меню ===
+        // === Мобільне меню === (залишаємо як є)
         const burger = document.getElementById('burger');
         const mobileMenu = document.getElementById('mobileMenu');
         const overlay = document.getElementById('overlay');
@@ -670,7 +683,7 @@
 
         sections.forEach(section => observer.observe(section));
 
-        // === Карусель ===
+        // === Карусель === (залишаємо як є)
         const carouselInner = document.getElementById('carouselInner');
         const prevBtn = document.getElementById('prev');
         const nextBtn = document.getElementById('next');
@@ -709,9 +722,11 @@
             carouselStartX = 0;
         }, { passive: true });
 
-        // === Форма ===
+        // === Форма === (оновлено з обробкою подій)
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
+        const form = document.getElementById('orderSubmitForm');
+        const formMessage = document.getElementById('formMessage');
         const quantityInput = document.getElementById('quantity');
         const incBtn = document.getElementById('inc');
         const decBtn = document.getElementById('dec');
@@ -754,6 +769,47 @@
                 ukrFields.classList.add('active');
             }
         });
+
+        // === Нова обробка форми для діагностики ===
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Зупиняємо стандартну відправку для тесту
+
+            // Валідація (проста)
+            if (!form.checkValidity()) {
+                showMessage('Заповніть всі обов\'язкові поля!', 'error');
+                return;
+            }
+
+            // Формуємо дані
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    showMessage('Форма відправлена! Перевірте email (може бути в спамі).', 'success');
+                    form.reset();
+                    updateTotal(); // Скидаємо кількість
+                    orderForm.classList.remove('active');
+                } else {
+                    showMessage('Помилка відправки. Спробуйте ще раз або зв\'яжіться з нами.', 'error');
+                }
+            })
+            .catch(error => {
+                showMessage('Помилка мережі: ' + error.message, 'error');
+            });
+        });
+
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = `form-message ${type}`;
+            formMessage.style.display = 'block';
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }
 
         updateTotal();
         quantityInput.addEventListener('input', updateTotal);
