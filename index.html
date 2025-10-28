@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* === Основні стилі === (залишаємо як є) */
+        /* === Основні стилі === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -322,13 +322,17 @@
             cursor: pointer;
             width: 100%;
             transition: all 0.3s;
+            position: relative;
         }
         .submit-btn:hover {
             background: #c6935e;
             transform: translateY(-2px);
         }
+        .btn-loading { display: none; }
+        .submit-btn:disabled .btn-text { display: none; }
+        .submit-btn:disabled .btn-loading { display: inline; }
 
-        /* === Повідомлення про статус === */
+        /* === Повідомлення === */
         .form-message {
             padding: 12px;
             border-radius: 8px;
@@ -336,7 +340,6 @@
             display: none;
             font-weight: 500;
         }
-        .form-message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .form-message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
         /* === Контакти === */
@@ -509,9 +512,11 @@
     <div class="order-form" id="orderForm">
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
-            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
-                <div id="formMessage" class="form-message"></div> <!-- Додано для статусів -->
 
+            <!-- Повідомлення -->
+            <div id="formMessage" class="form-message"></div>
+
+            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST" onsubmit="return handleSubmit(this)">
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
@@ -585,9 +590,12 @@
                 <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
                 <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
                 <input type="hidden" name="_captcha" value="false" />
-                <!-- Видалено _next для тестів; додайте назад, якщо потрібно: <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" /> -->
+                <input type="hidden" name="_next" value="thanks.html" />
 
-                <button type="submit" class="submit-btn">Відправити замовлення</button>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Відправити замовлення</span>
+                    <span class="btn-loading">Відправка...</span>
+                </button>
             </form>
         </div>
     </div>
@@ -616,12 +624,12 @@
     <!-- Футер -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Vuse Go 1000. Всі права захищені.</p>
+            <p>© 2025 Vuse Go 1000. Всі права захищені.</p>
         </div>
     </footer>
 
     <script>
-        // === Мобільне меню === (залишаємо як є)
+        // === Мобільне меню ===
         const burger = document.getElementById('burger');
         const mobileMenu = document.getElementById('mobileMenu');
         const overlay = document.getElementById('overlay');
@@ -683,7 +691,7 @@
 
         sections.forEach(section => observer.observe(section));
 
-        // === Карусель === (залишаємо як є)
+        // === Карусель ===
         const carouselInner = document.getElementById('carouselInner');
         const prevBtn = document.getElementById('prev');
         const nextBtn = document.getElementById('next');
@@ -722,25 +730,44 @@
             carouselStartX = 0;
         }, { passive: true });
 
-        // === Форма === (оновлено з обробкою подій)
+        // === Форма: Стандартна відправка + анімація ===
+        function handleSubmit(form) {
+            const messageEl = document.getElementById('formMessage');
+            const btnText = form.querySelector('.btn-text');
+            const btnLoading = form.querySelector('.btn-loading');
+
+            // Перевірка полів
+            if (!form.checkValidity()) {
+                messageEl.textContent = 'Заповніть всі обов\'язкові поля!';
+                messageEl.className = 'form-message error';
+                messageEl.style.display = 'block';
+                setTimeout(() => { messageEl.style.display = 'none'; }, 4000);
+                return false;
+            }
+
+            // Анімація
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            form.querySelector('button').disabled = true;
+
+            localStorage.setItem('formSubmitted', 'true');
+            return true;
+        }
+
+        // === Відкриття форми ===
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
-        const form = document.getElementById('orderSubmitForm');
-        const formMessage = document.getElementById('formMessage');
-        const quantityInput = document.getElementById('quantity');
-        const incBtn = document.getElementById('inc');
-        const decBtn = document.getElementById('dec');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const deliverySelect = document.getElementById('delivery');
-        const novaFields = document.getElementById('novaFields');
-        const ukrFields = document.getElementById('ukrFields');
-
-        const PRICE_PER_ITEM = 250;
-
         openFormBtn.addEventListener('click', () => {
             orderForm.classList.add('active');
             orderForm.scrollIntoView({ behavior: 'smooth' });
         });
+
+        // === Кількість ===
+        const quantityInput = document.getElementById('quantity');
+        const incBtn = document.getElementById('inc');
+        const decBtn = document.getElementById('dec');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const PRICE_PER_ITEM = 250;
 
         incBtn.addEventListener('click', () => {
             quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -760,6 +787,11 @@
             totalPriceEl.textContent = `Сума: ${total} грн`;
         }
 
+        // === Динамічні поля ===
+        const deliverySelect = document.getElementById('delivery');
+        const novaFields = document.getElementById('novaFields');
+        const ukrFields = document.getElementById('ukrFields');
+
         deliverySelect.addEventListener('change', () => {
             novaFields.classList.remove('active');
             ukrFields.classList.remove('active');
@@ -770,49 +802,7 @@
             }
         });
 
-        // === Нова обробка форми для діагностики ===
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Зупиняємо стандартну відправку для тесту
-
-            // Валідація (проста)
-            if (!form.checkValidity()) {
-                showMessage('Заповніть всі обов\'язкові поля!', 'error');
-                return;
-            }
-
-            // Формуємо дані
-            const formData = new FormData(form);
-
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage('Форма відправлена! Перевірте email (може бути в спамі).', 'success');
-                    form.reset();
-                    updateTotal(); // Скидаємо кількість
-                    orderForm.classList.remove('active');
-                } else {
-                    showMessage('Помилка відправки. Спробуйте ще раз або зв\'яжіться з нами.', 'error');
-                }
-            })
-            .catch(error => {
-                showMessage('Помилка мережі: ' + error.message, 'error');
-            });
-        });
-
-        function showMessage(text, type) {
-            formMessage.textContent = text;
-            formMessage.className = `form-message ${type}`;
-            formMessage.style.display = 'block';
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
-        }
-
         updateTotal();
-        quantityInput.addEventListener('input', updateTotal);
     </script>
 </body>
 </html>
