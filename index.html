@@ -512,12 +512,12 @@
             <!-- Повідомлення -->
             <div id="formMessage" class="form-message"></div>
 
-            <form 
-                id="orderSubmitForm" 
-                action="https://formspree.io/f/xwpwlnkz" 
-                method="POST" 
-                onsubmit="return handleSubmit(this)"
-            >
+<form 
+    id="orderSubmitForm" 
+    action="https://formspree.io/f/xwpwlnkz" 
+    method="POST" 
+    onsubmit="return handleSubmit(this)"
+>
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
@@ -575,16 +575,18 @@
 
                 <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <!-- Приховані поля -->
-                <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                <input type="hidden" name="_next" value="thanks.html" />
+    <!-- ПРИХОВАНІ ПОЛЯ — ОНОВЛЕНІ -->
+    <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
+    <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
+    
+    <!-- ПОВНА URL ДЛЯ ПЕРЕНАПРАВЛЕННЯ -->
+    <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
 
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">Відправити замовлення</span>
-                    <span class="btn-loading">Відправка...</span>
-                </button>
-            </form>
+    <button type="submit" class="submit-btn">
+        <span class="btn-text">Відправити замовлення</span>
+        <span class="btn-loading">Відправка...</span>
+    </button>
+</form>
         </div>
     </div>
 
