@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 11000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -16,7 +16,6 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
@@ -338,6 +337,7 @@
             font-weight: 500;
         }
         .form-message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .form-message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
 
         /* === Контакти === */
         .contacts {
@@ -394,8 +394,6 @@
             .carousel { max-width: 300px; }
             .order-form { padding: 30px 20px; }
         }
-
-        /* ЗАПРЕТ НА МОБІЛЬНІ ПРИСТРОЇ — ВИДАЛЕНО */
     </style>
 </head>
 <body>
@@ -426,7 +424,6 @@
             <h1>Vuse Go 1000 Creamy Tobacco</h1>
             <p>1000 затяжок · Сливочно-кремовий смак · 250 грн</p>
 
-            <!-- Карусель -->
             <div class="carousel" id="carousel">
                 <button class="carousel-btn prev" id="prev">Previous</button>
                 <button class="carousel-btn next" id="next">Next</button>
@@ -492,81 +489,70 @@
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
 
-            <!-- Повідомлення -->
             <div id="formMessage" class="form-message"></div>
 
-<form 
-    id="orderSubmitForm" 
-    action="https://formspree.io/f/xwpwlnkz" 
-    method="POST" 
-    onsubmit="return handleSubmit(this)"
->
-    <div class="form-group quantity">
-        <button type="button" id="dec">-</button>
-        <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
-        <button type="button" id="inc">+</button>
-        <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
-    </div>
+            <form id="orderSubmitForm" onsubmit="return sendToTelegram(event)">
+                <div class="form-group quantity">
+                    <button type="button" id="dec">-</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly />
+                    <button type="button" id="inc">+</button>
+                    <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
+                </div>
 
-    <div class="form-group">
-        <label>Ім'я *</label>
-        <input type="text" name="Ім'я" required />
-    </div>
-    <div class="form-group">
-        <label>Прізвище *</label>
-        <input type="text" name="Прізвище" required />
-    </div>
-    <div class="form-group">
-        <label>Номер телефону *</label>
-        <input type="tel" name="Телефон" required />
-    </div>
+                <div class="form-group">
+                    <label>Ім'я *</label>
+                    <input type="text" id="name" required />
+                </div>
+                <div class="form-group">
+                    <label>Прізвище *</label>
+                    <input type="text" id="surname" required />
+                </div>
+                <div class="form-group">
+                    <label>Номер телефону *</label>
+                    <input type="tel" id="phone" required />
+                </div>
 
-    <div class="form-group">
-        <label>Доставка *</label>
-        <select name="Доставка" required>
-            <option value="">Оберіть спосіб</option>
-            <option value="Нова Пошта">Нова Пошта</option>
-            <option value="Укрпошта">Укрпошта</option>
-        </select>
-    </div>
+                <div class="form-group">
+                    <label>Доставка *</label>
+                    <select id="delivery" required>
+                        <option value="">Оберіть спосіб</option>
+                        <option value="Нова Пошта">Нова Пошта</option>
+                        <option value="Укрпошта">Укрпошта</option>
+                    </select>
+                </div>
 
-    <div class="address-fields">
-        <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
-        <div class="form-group">
-            <label>Населений пункт *</label>
-            <input type="text" name="Населений пункт" required placeholder="Наприклад: Київ" />
-        </div>
-        <div class="form-group">
-            <label>Вулиця, будинок/квартира *</label>
-            <input type="text" name="Вулиця, будинок/квартира" required placeholder="Наприклад: Хрещатик, 25, кв. 12" />
-        </div>
-    </div>
+                <div class="address-fields">
+                    <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
+                    <div class="form-group">
+                        <label>Населений пункт *</label>
+                        <input type="text" id="city" required placeholder="Наприклад: Київ" />
+                    </div>
+                    <div class="form-group">
+                        <label>Вулиця, будинок/квартира *</label>
+                        <input type="text" id="address" required placeholder="Наприклад: Хрещатик, 25, кв. 12" />
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <label>Оплата *</label>
-        <select name="Оплата" required>
-            <option value="">Оберіть спосіб</option>
-            <option value="На карту">На карту</option>
-            <option value="IBAN">IBAN</option>
-            <option value="USDT">USDT</option>
-            <option value="Binance Pay">Binance Pay</option>
-            <option value="Bybit Pay">Bybit Pay</option>
-            <option value="OKX Pay">OKX Pay</option>
-        </select>
-    </div>
+                <div class="form-group">
+                    <label>Оплата *</label>
+                    <select id="payment" required>
+                        <option value="">Оберіть спосіб</option>
+                        <option value="На карту">На карту</option>
+                        <option value="IBAN">IBAN</option>
+                        <option value="USDT">USDT</option>
+                        <option value="Binance Pay">Binance Pay</option>
+                        <option value="Bybit Pay">Bybit Pay</option>
+                        <option value="OKX Pay">OKX Pay</option>
+                    </select>
+                </div>
 
-    <div class="total-price" id="totalPrice">Сума: 250 грн</div>
+                <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-    <!-- ПРИХОВАНІ ПОЛЯ -->
-    <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
-    <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-    <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
-
-    <button type="submit" class="submit-btn">
-        <span class="btn-text">Відправити замовлення</span>
-        <span class="btn-loading">Відправка...</span>
-    </button>
-</form>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Відправити замовлення</span>
+                    <span class="btn-loading">Відправка...</span>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -622,24 +608,6 @@
             });
         });
 
-        // === Свайп меню ===
-        let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', e => {
-            if (!startX) return;
-            let diffX = e.touches[0].clientX - startX;
-            if (diffX > 80) {
-                mobileMenu.classList.add('open');
-                overlay.classList.add('active');
-            } else if (diffX < -80 && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            }
-        }, { passive: true });
-
         // === Плавний скрол ===
         navLinks.forEach(link => {
             link.addEventListener('click', e => {
@@ -683,23 +651,6 @@
             updateCarousel();
         });
 
-        // Свайп каруселі
-        let carouselStartX = 0;
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => {
-            carouselStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', e => {
-            if (!carouselStartX) return;
-            let diff = carouselStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) nextBtn.click();
-                else prevBtn.click();
-            }
-            carouselStartX = 0;
-        }, { passive: true });
-
         // === Відкриття форми ===
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
@@ -732,25 +683,82 @@
             totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
         }
 
-        // === Formspree: відправка ===
-        function handleSubmit(form) {
-            const messageEl = document.getElementById('formMessage');
-            const btnText = form.querySelector('.btn-text');
-            const btnLoading = form.querySelector('.btn-loading');
+        // === Telegram: НАЛАШТУВАННЯ ===
+        const BOT_TOKEN = '8435209606:AAF018rPlPPjm2FAbJkxEYYU735GqXXrHRA';  // ← ЗАМІНІТЬ!
+        const CHAT_ID = '313678478';  // ← ЗАМІНІТЬ!
 
+        // === Відправка в Telegram ===
+        async function sendToTelegram(event) {
+            event.preventDefault();
+
+            const form = event.target;
             if (!form.checkValidity()) {
-                messageEl.textContent = 'Заповніть всі обов\'язкові поля!';
-                messageEl.className = 'form-message error';
-                messageEl.style.display = 'block';
-                setTimeout(() => { messageEl.style.display = 'none'; }, 4000);
+                showMessage('Заповніть всі обов\'язкові поля!', 'error');
                 return false;
             }
 
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
             btnText.style.display = 'none';
             btnLoading.style.display = 'inline';
-            form.querySelector('button').disabled = true;
+            submitBtn.disabled = true;
 
-            return true;
+            const quantity = document.getElementById('quantity').value;
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const phone = document.getElementById('phone').value;
+            const delivery = document.getElementById('delivery').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+            const payment = document.getElementById('payment').value;
+            const total = quantity * 250 + ' грн';
+
+            const message = `
+Нове замовлення Vuse Go 1000
+
+Клієнт: ${name} ${surname}
+Телефон: ${phone}
+
+Доставка: ${delivery}
+Адреса: ${city}, ${address}
+
+Оплата: ${payment}
+Кількість: ${quantity} шт.
+Сума: ${total}
+
+#vuse #order
+            `.trim();
+
+            try {
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=HTML`;
+                const response = await fetch(url);
+                if (response.ok) {
+                    showMessage('Замовлення відправлено! Ми зв\'яжемося з вами.', 'success');
+                    form.reset();
+                    updateTotal();
+                    setTimeout(() => {
+                        window.location.href = 'thanks.html';
+                    }, 2000);
+                } else {
+                    throw new Error('Telegram API error');
+                }
+            } catch (error) {
+                showMessage('Помилка відправки. Спробуйте ще раз.', 'error');
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+
+            return false;
+        }
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('formMessage');
+            messageEl.textContent = text;
+            messageEl.className = `form-message ${type}`;
+            messageEl.style.display = 'block';
+            setTimeout(() => { messageEl.style.display = 'none'; }, 5000);
         }
 
         updateTotal();
