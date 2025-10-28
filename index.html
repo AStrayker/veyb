@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* === Основні стилі === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -16,14 +15,13 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* === Хедер === */
+        /* Хедер */
         header {
             position: fixed;
             top: 0; left: 0;
@@ -51,7 +49,7 @@
             color: #d4a373;
         }
 
-        /* === Мобільне меню === */
+        /* Мобільне меню */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -91,7 +89,7 @@
         }
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* === Hero === */
+        /* Hero */
         .hero {
             padding-top: 80px;
             text-align: center;
@@ -113,7 +111,7 @@
             opacity: 0;
         }
 
-        /* === Карусель === */
+        /* Карусель */
         .carousel {
             position: relative;
             max-width: 400px;
@@ -121,20 +119,13 @@
             overflow: hidden;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            animation: fadeIn 1.5s ease-out;
         }
         .carousel-inner {
             display: flex;
             transition: transform 0.5s ease;
         }
-        .carousel-item {
-            min-width: 100%;
-        }
-        .carousel-item img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+        .carousel-item { min-width: 100%; }
+        .carousel-item img { width: 100%; height: auto; object-fit: cover; }
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -156,7 +147,7 @@
         .prev { left: 15px; }
         .next { right: 15px; }
 
-        /* === Секції === */
+        /* Секції */
         section {
             padding: 80px 0;
             opacity: 0;
@@ -181,7 +172,7 @@
             border-radius: 2px;
         }
 
-        /* === Ціна === */
+        /* Ціна */
         .price-section {
             background: #fff;
             border-radius: 16px;
@@ -215,7 +206,7 @@
             box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
         }
 
-        /* === Опис === */
+        /* Опис */
         .description {
             max-width: 800px;
             margin: 0 auto;
@@ -224,7 +215,7 @@
             color: #555;
         }
 
-        /* === Доставка та оплата === */
+        /* Доставка */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -244,7 +235,7 @@
             font-size: 1.4rem;
         }
 
-        /* === Форма === */
+        /* Форма */
         .order-form {
             display: none;
             background: white;
@@ -328,7 +319,7 @@
             transform: translateY(-2px);
         }
 
-        /* === Контакти === */
+        /* Контакти */
         .contacts {
             text-align: center;
             max-width: 500px;
@@ -360,7 +351,7 @@
         }
         .contact-btn i { font-size: 1.3rem; }
 
-        /* === Футер === */
+        /* Футер */
         footer {
             background: #333;
             color: #ccc;
@@ -369,39 +360,18 @@
             font-size: 0.9rem;
         }
 
-        /* === Анімації === */
+        /* Анімації */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* === Мобільні стилі === */
+        /* Мобільні стилі */
         @media (max-width: 768px) {
             .burger { display: block; }
             .hero h1 { font-size: 1.8rem; }
             .price { font-size: 2.5rem; }
             .section-title { font-size: 1.7rem; }
             .carousel { max-width: 300px; }
-        }
-
-        /* === Захист від перегляду на мобільному === */
-        @media (max-width: 480px) {
-            body::before {
-                content: "Цей сайт оптимізований для перегляду на комп'ютері. Рекомендуємо відкрити на ПК.";
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: #fff;
-                color: #333;
-                font-size: 1.1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                padding: 20px;
-                z-index: 9999;
-                line-height: 1.5;
-            }
-            body > *:not(::before) { display: none !important; }
         }
     </style>
 </head>
@@ -422,7 +392,7 @@
             <li><a href="#price" class="nav-link">Ціна</a></li>
             <li><a href="#description" class="nav-link">Опис</a></li>
             <li><a href="#delivery" class="nav-link">Оплата та доставка</a></li>
-            <li><a href="#contact" class="nav-link">Зв'язатися з продавцем</a></li>
+            <li><a href="#contact" class="nav-link">Зв'язатися</a></li>
         </ul>
     </div>
     <div class="overlay" id="overlay"></div>
@@ -433,19 +403,18 @@
             <h1>Vuse Go 1000 Creamy Tobacco</h1>
             <p>1000 затяжок · Сливочно-кремовий смак · 250 грн</p>
 
-            <!-- Карусель -->
             <div class="carousel" id="carousel">
-                <button class="carousel-btn prev" id="prev">Left Arrow</button>
-                <button class="carousel-btn next" id="next">Right Arrow</button>
+                <button class="carousel-btn prev" id="prev">Left</button>
+                <button class="carousel-btn next" id="next">Right</button>
                 <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse Go 1000" />
+                        <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse" />
                     </div>
                     <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/2.webp?raw=true" alt="Vuse Go 1000" />
+                        <img src="https://github.com/AStrayker/veyb/blob/main/2.webp?raw=true" alt="Vuse" />
                     </div>
                     <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/3.webp?raw=true" alt="Vuse Go 1000" />
+                        <img src="https://github.com/AStrayker/veyb/blob/main/3.webp?raw=true" alt="Vuse" />
                     </div>
                 </div>
             </div>
@@ -469,9 +438,8 @@
         <div class="container">
             <h2 class="section-title">Опис товару</h2>
             <div class="description">
-                <p><strong>Одноразовий вейп Vuse Go 1000 Creamy Tobacco</strong> поставляється з попередньо заправленим 2 мл електронної рідини зі сумішшю насиченого тютюнового смаку з нотками карамелі та солодкими, ароматними ванильними ароматами.</p>
-                <p style="margin-top: 20px;"><strong>Нове устройство Vuse GO 1000</strong> забезпечує більше затяжок, ніж інші наші одноразові пристрої Vuse. З Vuse GO 1000 користувачі тепер можуть насолоджуватися <strong>до 1000 затяжок</strong> з одного пристрою*.</p>
-                <p style="margin-top: 20px;">Vuse GO 1000 — одноразова електронна сигарета, призначена для одноразового використання і <strong>не підлягає перезарядці</strong>.</p>
+                <p><strong>Одноразовий вейп Vuse Go 1000 Creamy Tobacco</strong> — 2 мл рідини, насичений тютюн з карамеллю та ваніллю.</p>
+                <p style="margin-top: 20px;"><strong>До 1000 затяжок</strong> на одному пристрої. Без перезарядки.</p>
             </div>
         </div>
     </section>
@@ -484,11 +452,11 @@
                 <div class="info-card">
                     <h3>Доставка</h3>
                     <p><strong>Нова Пошта</strong> — за тарифами перевізника.</p>
-                    <p><strong>Укрпошта</strong> — безкоштовна доставка в межах країни.</p>
+                    <p><strong>Укрпошта</strong> — безкоштовно по Україні.</p>
                 </div>
                 <div class="info-card">
                     <h3>Оплата</h3>
-                    <p>На карту, IBAN, USDT, Binance Pay, Bybit Pay, OKX Pay.</p>
+                    <p>Карта, IBAN, USDT, Binance Pay, Bybit Pay, OKX Pay.</p>
                 </div>
             </div>
         </div>
@@ -497,67 +465,85 @@
     <!-- Форма замовлення -->
     <div class="order-form" id="orderForm">
         <div class="container">
-            <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
-            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
+            <h2 class="section-title" style="margin-bottom: 20px;">Оформити замовлення</h2>
+            <form id="orderFormElement" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html">
+
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
+                    <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
                     <button type="button" id="inc">+</button>
                     <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
                 </div>
 
                 <div class="form-group">
                     <label>Ім'я *</label>
-                    <input type="text" name="name" required />
+                    <input type="text" name="Ім'я" required />
                 </div>
                 <div class="form-group">
                     <label>Прізвище *</label>
-                    <input type="text" name="surname" required />
+                    <input type="text" name="Прізвище" required />
                 </div>
                 <div class="form-group">
-                    <label>Номер телефону *</label>
-                    <input type="tel" name="phone" required />
+                    <label>Телефон *</label>
+                    <input type="tel" name="Телефон" id="phoneInput" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Месенджер для зв'язку *</label>
+                    <select name="Месенджер" id="messengerSelect" required>
+                        <option value="telegram">Telegram</option>
+                        <option value="viber">Viber</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label>Доставка *</label>
-                    <select name="delivery" id="delivery" required>
-                        <option value="">Оберіть спосіб</option>
+                    <select name="Доставка" id="delivery" required>
+                        <option value="">Оберіть</option>
                         <option value="nova">Нова Пошта</option>
                         <option value="ukr">Укрпошта</option>
                     </select>
                 </div>
 
+                <!-- Нова Пошта -->
                 <div class="dynamic-fields" id="novaFields">
                     <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="city_nova" />
+                        <label>Місто *</label>
+                        <input type="text" name="Місто (Нова Пошта)" id="cityInput" placeholder="Введіть місто..." />
+                        <div id="citySuggestions" style="border:1px solid #ddd; max-height:150px; overflow-y:auto; display:none; background:white; position:absolute; width:100%; z-index:10;"></div>
                     </div>
                     <div class="form-group">
-                        <label>Номер відділення</label>
-                        <input type="text" name="branch_nova" />
+                        <label>Відділення *</label>
+                        <select name="Відділення (Нова Пошта)" id="branchSelect" disabled>
+                            <option value="">Спочатку виберіть місто</option>
+                        </select>
                     </div>
                 </div>
 
+                <!-- Укрпошта -->
                 <div class="dynamic-fields" id="ukrFields">
                     <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="city_ukr" />
+                        <label>Індекс *</label>
+                        <input type="text" name="Індекс (Укрпошта)" />
                     </div>
                     <div class="form-group">
-                        <label>Індекс</label>
-                        <input type="text" name="index_ukr" />
+                        <label>Вулиця *</label>
+                        <input type="text" name="Вулиця (Укрпошта)" />
                     </div>
                     <div class="form-group">
-                        <label>Адреса відділення</label>
-                        <input type="text" name="address_ukr" />
+                        <label>Будинок *</label>
+                        <input type="text" name="Будинок (Укрпошта)" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Оплата *</label>
-                    <select name="payment" required>
-                        <option value="">Оберіть спосіб</option>
+                    <select name="Оплата" required>
                         <option value="card">На карту</option>
                         <option value="iban">IBAN</option>
                         <option value="usdt">USDT</option>
@@ -569,11 +555,6 @@
 
                 <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
-
                 <button type="submit" class="submit-btn">Відправити замовлення</button>
             </form>
         </div>
@@ -584,7 +565,7 @@
         <div class="container">
             <h2 class="section-title">Зв'язатися з продавцем</h2>
             <div class="contacts">
-                <p>Оберіть зручний спосіб зв'язку:</p>
+                <p>Оберіть зручний спосіб:</p>
                 <div class="contact-btns">
                     <a href="https://t.me/+380953804630" target="_blank" class="contact-btn">
                         <i class="fab fa-telegram"></i> Telegram
@@ -600,7 +581,6 @@
         </div>
     </section>
 
-    <!-- Футер -->
     <footer>
         <div class="container">
             <p>© 2025 Vuse Go 1000. Всі права захищені.</p>
@@ -631,85 +611,43 @@
             });
         });
 
-        // === Свайп меню ===
+        // Свайп меню
         let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-
+        document.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
         document.addEventListener('touchmove', e => {
             if (!startX) return;
-            let diffX = e.touches[0].clientX - startX;
-            if (diffX > 80) {
-                mobileMenu.classList.add('open');
-                overlay.classList.add('active');
-            } else if (diffX < -80 && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            }
+            const diff = e.touches[0].clientX - startX;
+            if (diff > 80) { mobileMenu.classList.add('open'); overlay.classList.add('active'); }
+            else if (diff < -80 && mobileMenu.classList.contains('open')) { mobileMenu.classList.remove('open'); overlay.classList.remove('active'); }
         }, { passive: true });
 
-        // === Плавний скрол ===
+        // Плавний скрол
         navLinks.forEach(link => {
             link.addEventListener('click', e => {
                 e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // === Анімація при скролі ===
-        const sections = document.querySelectorAll('section');
+        // Анімація при скролі
         const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1 });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-        sections.forEach(section => observer.observe(section));
-
-        // === Карусель ===
+        // Карусель
         const carouselInner = document.getElementById('carouselInner');
-        const prevBtn = document.getElementById('prev');
-        const nextBtn = document.getElementById('next');
         let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
-
-        function updateCarousel() {
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + 3) % 3;
             carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
+        });
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % 3;
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
         });
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        });
-
-        // Свайп каруселі
-        let carouselStartX = 0;
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => {
-            carouselStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', e => {
-            if (!carouselStartX) return;
-            let diff = carouselStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) nextBtn.click();
-                else prevBtn.click();
-            }
-            carouselStartX = 0;
-        }, { passive: true });
-
-        // === Форма ===
+        // Форма
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
         const quantityInput = document.getElementById('quantity');
@@ -719,6 +657,11 @@
         const deliverySelect = document.getElementById('delivery');
         const novaFields = document.getElementById('novaFields');
         const ukrFields = document.getElementById('ukrFields');
+        const cityInput = document.getElementById('cityInput');
+        const citySuggestions = document.getElementById('citySuggestions');
+        const branchSelect = document.getElementById('branchSelect');
+        const phoneInput = document.getElementById('phoneInput');
+        const messengerSelect = document.getElementById('messengerSelect');
 
         const PRICE_PER_ITEM = 250;
 
@@ -727,27 +670,22 @@
             orderForm.scrollIntoView({ behavior: 'smooth' });
         });
 
-        incBtn.addEventListener('click', () => {
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            updateTotal();
-        });
-
-        decBtn.addEventListener('click', () => {
-            if (quantityInput.value > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-                updateTotal();
-            }
-        });
+        incBtn.addEventListener('click', () => { quantityInput.value = parseInt(quantityInput.value) + 1; updateTotal(); });
+        decBtn.addEventListener('click', () => { if (quantityInput.value > 1) { quantityInput.value--; updateTotal(); } });
 
         function updateTotal() {
-            const qty = parseInt(quantityInput.value);
-            const total = qty * PRICE_PER_ITEM;
+            const total = quantityInput.value * PRICE_PER_ITEM;
             totalPriceEl.textContent = `Сума: ${total} грн`;
         }
 
+        // Динамічні поля
         deliverySelect.addEventListener('change', () => {
             novaFields.classList.remove('active');
             ukrFields.classList.remove('active');
+            citySuggestions.style.display = 'none';
+            branchSelect.disabled = true;
+            branchSelect.innerHTML = '<option value="">Спочатку виберіть місто</option>';
+
             if (deliverySelect.value === 'nova') {
                 novaFields.classList.add('active');
             } else if (deliverySelect.value === 'ukr') {
@@ -755,8 +693,101 @@
             }
         });
 
+        // Нова Пошта API
+        let cityRef = '';
+        cityInput.addEventListener('input', async () => {
+            const query = cityInput.value.trim();
+            if (query.length < 2) { citySuggestions.style.display = 'none'; return; }
+
+            const res = await fetch('https://api.novaposhta.ua/v2.0/json/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    apiKey: '',
+                    modelName: 'Address',
+                    calledMethod: 'searchSettlements',
+                    methodProperties: { CityName: query, Limit: 10 }
+                })
+            });
+            const data = await res.json();
+            citySuggestions.innerHTML = '';
+            if (data.success && data.data[0].Addresses.length > 0) {
+                data.data[0].Addresses.forEach(city => {
+                    const div = document.createElement('div');
+                    div.textContent = city.Present;
+                    div.style.padding = '10px';
+                    div.style.cursor = 'pointer';
+                    div.onclick = () => {
+                        cityInput.value = city.Present;
+                        cityRef = city.DeliveryCity;
+                        citySuggestions.style.display = 'none';
+                        loadBranches(cityRef);
+                    };
+                    citySuggestions.appendChild(div);
+                });
+                citySuggestions.style.display = 'block';
+            }
+        });
+
+        async function loadBranches(cityRef) {
+            branchSelect.innerHTML = '<option>Завантаження...</option>';
+            branchSelect.disabled = true;
+
+            const res = await fetch('https://api.novaposhta.ua/v2.0/json/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    apiKey: '',
+                    modelName: 'Address',
+                    calledMethod: 'getWarehouses',
+                    methodProperties: { CityRef: cityRef }
+                })
+            });
+            const data = await res.json();
+            branchSelect.innerHTML = '<option value="">Оберіть відділення</option>';
+            if (data.success) {
+                data.data.forEach(branch => {
+                    const opt = document.createElement('option');
+                    opt.value = branch.Description;
+                    opt.textContent = branch.ShortAddress || branch.Description;
+                    branchSelect.appendChild(opt);
+                });
+                branchSelect.disabled = false;
+            }
+        }
+
+        // Форматування телефону
+        phoneInput.addEventListener('input', () => {
+            let val = phoneInput.value.replace(/\D/g, '');
+            if (val.startsWith('380')) val = val.slice(3);
+            if (val.length > 9) val = val.slice(0, 9);
+            phoneInput.value = val ? `+380${val}` : '';
+        });
+
+        // Перед відправкою — додати посилання
+        document.getElementById('orderFormElement').addEventListener('submit', function(e) {
+            const phone = phoneInput.value;
+            const messenger = messengerSelect.value;
+            let link = '';
+            if (messenger === 'telegram') link = `https://t.me/${phone.replace('+', '')}`;
+            else if (messenger === 'viber') link = `viber://chat?number=${phone}`;
+            else if (messenger === 'whatsapp') link = `https://wa.me/${phone.replace('+', '')}`;
+
+            const callLink = `tel:${phone}`;
+
+            // Додаємо приховані поля з посиланнями
+            const inputLink = document.createElement('input');
+            inputLink.type = 'hidden';
+            inputLink.name = 'Посилання на месенджер';
+            inputLink.value = `<a href="${link}">${messenger}</a>`;
+            this.appendChild(inputLink);
+
+            const inputCall = document.createElement('input');
+            inputCall.type = 'hidden';
+            inputCall.name = 'Дзвінок';
+            inputCall.value = `<a href="${callLink}">${phone}</a>`;
+            this.appendChild(inputCall);
+        });
+
         updateTotal();
-        quantityInput.addEventListener('input', updateTotal);
     </script>
 </body>
 </html>
