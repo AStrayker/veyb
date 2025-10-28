@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -328,6 +328,18 @@
             transform: translateY(-2px);
         }
 
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        .success-message.active { display: block; animation: fadeIn 0.5s; }
+
         /* === Контакти === */
         .contacts {
             text-align: center;
@@ -477,7 +489,7 @@
     <div class="order-form" id="orderForm">
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
-            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
+            <form id="orderFormElement">
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
@@ -507,7 +519,7 @@
                     </select>
                 </div>
 
-                <!-- Поля для Нової Пошти -->
+                <!-- Нова Пошта -->
                 <div class="dynamic-fields" id="novaFields">
                     <div class="form-group">
                         <label>Населений пункт</label>
@@ -519,7 +531,7 @@
                     </div>
                 </div>
 
-                <!-- Поля для Укрпошти -->
+                <!-- Укрпошта -->
                 <div class="dynamic-fields" id="ukrFields">
                     <div class="form-group">
                         <label>Індекс</label>
@@ -550,12 +562,10 @@
 
                 <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
-
                 <button type="submit" class="submit-btn">Відправити замовлення</button>
+                <div class="success-message" id="successMessage">
+                    Дякуємо! Ваше замовлення отримано. Ми зв'яжемося з вами найближчим часом.
+                </div>
             </form>
         </div>
     </div>
@@ -568,13 +578,13 @@
                 <p>Оберіть зручний спосіб зв'язку:</p>
                 <div class="contact-btns">
                     <a href="https://t.me/+380953804630" target="_blank" class="contact-btn">
-                        <i class="fab fa-telegram"></i> Telegram
+                        Telegram
                     </a>
                     <a href="viber://chat?number=+380953804630" class="contact-btn">
-                        <i class="fab fa-viber"></i> Viber
+                        Viber
                     </a>
                     <a href="https://wa.me/380953804630" target="_blank" class="contact-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        WhatsApp
                     </a>
                 </div>
             </div>
@@ -589,159 +599,170 @@
     </footer>
 
     <script>
-        // === Мобільне меню ===
-        const burger = document.getElementById('burger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        const navLinks = document.querySelectorAll('.nav-link');
+        // === ВСІ ФУНКЦІЇ ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Мобільне меню
+            const burger = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-        burger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
+            burger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                overlay.classList.toggle('active');
+            });
 
-        overlay.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            overlay.classList.remove('active');
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            overlay.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
                 overlay.classList.remove('active');
             });
-        });
 
-        // === Свайп меню ===
-        let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', e => {
-            if (!startX) return;
-            let diffX = e.touches[0].clientX - startX;
-            if (diffX > 80) {
-                mobileMenu.classList.add('open');
-                overlay.classList.add('active');
-            } else if (diffX < -80 && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            }
-        }, { passive: true });
-
-        // === Плавний скрол ===
-        navLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    overlay.classList.remove('active');
+                });
             });
-        });
 
-        // === Анімація при скролі ===
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            // Свайп меню
+            let startX = 0;
+            document.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+            document.addEventListener('touchmove', e => {
+                if (!startX) return;
+                const diffX = e.touches[0].clientX - startX;
+                if (diffX > 80) {
+                    mobileMenu.classList.add('open');
+                    overlay.classList.add('active');
+                } else if (diffX < -80 && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            }, { passive: true });
+
+            // Плавний скрол
+            navLinks.forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Анімація при скролі
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+            // Карусель
+            const carouselInner = document.getElementById('carouselInner');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            let currentIndex = 0;
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+
+            const updateCarousel = () => {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            };
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            });
+
+            let carouselStartX = 0;
+            const carousel = document.getElementById('carousel');
+            carousel.addEventListener('touchstart', e => carouselStartX = e.touches[0].clientX, { passive: true });
+            carousel.addEventListener('touchend', e => {
+                if (!carouselStartX) return;
+                const diff = carouselStartX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) diff > 0 ? nextBtn.click() : prevBtn.click();
+                carouselStartX = 0;
+            }, { passive: true });
+
+            // Форма
+            const openFormBtn = document.getElementById('openForm');
+            const orderForm = document.getElementById('orderForm');
+            const quantityInput = document.getElementById('quantity');
+            const incBtn = document.getElementById('inc');
+            const decBtn = document.getElementById('dec');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const deliverySelect = document.getElementById('delivery');
+            const novaFields = document.getElementById('novaFields');
+            const ukrFields = document.getElementById('ukrFields');
+            const form = document.getElementById('orderFormElement');
+            const successMessage = document.getElementById('successMessage');
+
+            const PRICE_PER_ITEM = 250;
+
+            openFormBtn.addEventListener('click', () => {
+                orderForm.classList.add('active');
+                orderForm.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            incBtn.addEventListener('click', () => {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+                updateTotal();
+            });
+
+            decBtn.addEventListener('click', () => {
+                if (quantityInput.value > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                    updateTotal();
                 }
             });
-        }, { threshold: 0.1 });
 
-        sections.forEach(section => observer.observe(section));
+            const updateTotal = () => {
+                const qty = parseInt(quantityInput.value);
+                totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
+            };
 
-        // === Карусель ===
-        const carouselInner = document.getElementById('carouselInner');
-        const prevBtn = document.getElementById('prev');
-        const nextBtn = document.getElementById('next');
-        let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
+            deliverySelect.addEventListener('change', () => {
+                novaFields.classList.remove('active');
+                ukrFields.classList.remove('active');
+                if (deliverySelect.value === 'nova') novaFields.classList.add('active');
+                if (deliverySelect.value === 'ukr') ukrFields.classList.add('active');
+            });
 
-        function updateCarousel() {
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
+            // ВІДПРАВКА ФОРМИ БЕЗ FormSubmit
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
 
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
-        });
+                // Додаємо продукт і суму
+                data.product = "Vuse Go 1000 Creamy Tobacco";
+                data.total = `${parseInt(data.quantity) * 250} грн`;
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        });
+                try {
+                    const response = await fetch('https://formspree.io/f/your-form-id', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
 
-        // Свайп каруселі
-        let carouselStartX = 0;
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => {
-            carouselStartX = e.touches[0].clientX;
-        }, { passive: true });
+                    if (response.ok) {
+                        successMessage.classList.add('active');
+                        form.reset();
+                        quantityInput.value = 1;
+                        updateTotal();
+                        novaFields.classList.remove('active');
+                        ukrFields.classList.remove('active');
+                    }
+                } catch (err) {
+                    alert('Помилка відправки. Спробуйте ще раз.');
+                }
+            });
 
-        carousel.addEventListener('touchend', e => {
-            if (!carouselStartX) return;
-            let diff = carouselStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) nextBtn.click();
-                else prevBtn.click();
-            }
-            carouselStartX = 0;
-        }, { passive: true });
-
-        // === Форма ===
-        const openFormBtn = document.getElementById('openForm');
-        const orderForm = document.getElementById('orderForm');
-        const quantityInput = document.getElementById('quantity');
-        const incBtn = document.getElementById('inc');
-        const decBtn = document.getElementById('dec');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const deliverySelect = document.getElementById('delivery');
-        const novaFields = document.getElementById('novaFields');
-        const ukrFields = document.getElementById('ukrFields');
-
-        const PRICE_PER_ITEM = 250;
-
-        openFormBtn.addEventListener('click', () => {
-            orderForm.classList.add('active');
-            orderForm.scrollIntoView({ behavior: 'smooth' });
-        });
-
-        incBtn.addEventListener('click', () => {
-            quantityInput.value = parseInt(quantityInput.value) + 1;
             updateTotal();
         });
-
-        decBtn.addEventListener('click', () => {
-            if (quantityInput.value > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-                updateTotal();
-            }
-        });
-
-        function updateTotal() {
-            const qty = parseInt(quantityInput.value);
-            const total = qty * PRICE_PER_ITEM;
-            totalPriceEl.textContent = `Сума: ${total} грн`;
-        }
-
-        // === Виправлення: правильне відображення полів ===
-        deliverySelect.addEventListener('change', () => {
-            // Скидаємо всі поля
-            novaFields.classList.remove('active');
-            ukrFields.classList.remove('active');
-
-            if (deliverySelect.value === 'nova') {
-                novaFields.classList.add('active');
-            } else if (deliverySelect.value === 'ukr') {
-                ukrFields.classList.add('active');
-            }
-        });
-
-        // Початкове оновлення
-        updateTotal();
-        quantityInput.addEventListener('input', updateTotal);
     </script>
 </body>
 </html>
