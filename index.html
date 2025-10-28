@@ -202,7 +202,7 @@
             color: white;
             border: none;
             padding: 14px 32px;
-            font-size Santa1.1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
@@ -300,9 +300,6 @@
             font-weight: 600;
         }
 
-        .dynamic-fields { display: none; margin-top: 15px; }
-        .dynamic-fields.active { display: block; animation: fadeIn 0.4s; }
-
         .total-price {
             font-size: 1.3rem;
             font-weight: 600;
@@ -397,7 +394,6 @@
             .carousel { max-width: 300px; }
         }
 
-        /* === Захист від перегляду на мобільному === */
         @media (max-width: 480px) {
             body::before {
                 content: "Цей сайт оптимізований для перегляду на комп'ютері. Рекомендуємо відкрити на ПК.";
@@ -514,9 +510,14 @@
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
 
             <!-- Повідомлення -->
-            <div id="formMessage" class="form-message" style="display:none;"></div>
+            <div id="formMessage" class="form-message"></div>
 
-            <form id="orderSubmitForm" action="https://formspree.io/f/xwpwlnkz" method="POST" onsubmit="return handleSubmit(this)">
+            <form 
+                id="orderSubmitForm" 
+                action="https://formspree.io/f/xwpwlnkz" 
+                method="POST" 
+                onsubmit="return handleSubmit(this)"
+            >
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
@@ -539,38 +540,23 @@
 
                 <div class="form-group">
                     <label>Доставка *</label>
-                    <select name="Доставка" id="delivery" required>
+                    <select name="Доставка" required>
                         <option value="">Оберіть спосіб</option>
                         <option value="Нова Пошта">Нова Пошта</option>
                         <option value="Укрпошта">Укрпошта</option>
                     </select>
                 </div>
 
-                <!-- Нова Пошта -->
-                <div class="dynamic-fields" id="novaFields">
+                <!-- АДРЕСА — ЗАВЖДИ ВИДИМА -->
+                <div class="address-fields">
+                    <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
                     <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="Місто (Нова Пошта)" />
+                        <label>Населений пункт *</label>
+                        <input type="text" name="Населений пункт" required placeholder="Наприклад: Київ" />
                     </div>
                     <div class="form-group">
-                        <label>Номер відділення</label>
-                        <input type="text" name="Відділення (Нова Пошта)" />
-                    </div>
-                </div>
-
-                <!-- Укрпошта -->
-                <div class="dynamic-fields" id="ukrFields">
-                    <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="Місто (Укрпошта)" />
-                    </div>
-                    <div class="form-group">
-                        <label>Індекс</label>
-                        <input type="text" name="Індекс (Укрпошта)" />
-                    </div>
-                    <div class="form-group">
-                        <label>Адреса відділення</label>
-                        <input type="text" name="Адреса (Укрпошта)" />
+                        <label>Вулиця, будинок/квартира *</label>
+                        <input type="text" name="Вулиця, будинок/квартира" required placeholder="Наприклад: Хрещатик, 25, кв. 12" />
                     </div>
                 </div>
 
@@ -732,27 +718,6 @@
             carouselStartX = 0;
         }, { passive: true });
 
-        // === Форма: Formspree ===
-        function handleSubmit(form) {
-            const messageEl = document.getElementById('formMessage');
-            const btnText = form.querySelector('.btn-text');
-            const btnLoading = form.querySelector('.btn-loading');
-
-            if (!form.checkValidity()) {
-                messageEl.textContent = 'Заповніть всі обов\'язкові поля!';
-                messageEl.className = 'form-message error';
-                messageEl.style.display = 'block';
-                setTimeout(() => { messageEl.style.display = 'none'; }, 4000);
-                return false;
-            }
-
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            form.querySelector('button').disabled = true;
-
-            return true;
-        }
-
         // === Відкриття форми ===
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
@@ -785,20 +750,26 @@
             totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
         }
 
-        // === Динамічні поля ===
-        const deliverySelect = document.getElementById('delivery');
-        const novaFields = document.getElementById('novaFields');
-        const ukrFields = document.getElementById('ukrFields');
+        // === Formspree: відправка ===
+        function handleSubmit(form) {
+            const messageEl = document.getElementById('formMessage');
+            const btnText = form.querySelector('.btn-text');
+            const btnLoading = form.querySelector('.btn-loading');
 
-        deliverySelect.addEventListener('change', () => {
-            novaFields.classList.remove('active');
-            ukrFields.classList.remove('active');
-            if (deliverySelect.value === 'Нова Пошта') {
-                novaFields.classList.add('active');
-            } else if (deliverySelect.value === 'Укрпошта') {
-                ukrFields.classList.add('active');
+            if (!form.checkValidity()) {
+                messageEl.textContent = 'Заповніть всі обов\'язкові поля!';
+                messageEl.className = 'form-message error';
+                messageEl.style.display = 'block';
+                setTimeout(() => { messageEl.style.display = 'none'; }, 4000);
+                return false;
             }
-        });
+
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            form.querySelector('button').disabled = true;
+
+            return true;
+        }
 
         updateTotal();
     </script>
