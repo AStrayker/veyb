@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -16,6 +16,7 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
@@ -254,7 +255,6 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
         .order-form.active { display: block; animation: fadeIn 0.6s; }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -300,16 +300,8 @@
             font-weight: 600;
         }
 
-        /* Поля доставки — завжди видимі */
-        .delivery-fields {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f8f8f8;
-            border-radius: 8px;
-        }
-        .delivery-fields .form-group {
-            margin-bottom: 15px;
-        }
+        .dynamic-fields { display: none; margin-top: 15px; }
+        .dynamic-fields.active { display: block; animation: fadeIn 0.4s; }
 
         .total-price {
             font-size: 1.3rem;
@@ -390,6 +382,27 @@
             .section-title { font-size: 1.7rem; }
             .carousel { max-width: 300px; }
         }
+
+        /* === Захист від перегляду на мобільному === */
+        @media (max-width: 480px) {
+            body::before {
+                content: "Цей сайт оптимізований для перегляду на комп'ютері. Рекомендуємо відкрити на ПК.";
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: #fff;
+                color: #333;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 20px;
+                z-index: 9999;
+                line-height: 1.5;
+            }
+            body > *:not(::before) { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -398,7 +411,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">Vuse Go 1000</div>
-            <div class="burger" id="burger">☰</div>
+            <div class="burger" id="burger">Menu</div>
         </div>
     </header>
 
@@ -422,8 +435,8 @@
 
             <!-- Карусель -->
             <div class="carousel" id="carousel">
-                <button class="carousel-btn prev" id="prev">‹</button>
-                <button class="carousel-btn next" id="next">›</button>
+                <button class="carousel-btn prev" id="prev">Left Arrow</button>
+                <button class="carousel-btn next" id="next">Right Arrow</button>
                 <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
                         <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse Go 1000" />
@@ -482,10 +495,11 @@
     </section>
 
     <!-- Форма замовлення -->
+    <!-- Форма замовлення -->
     <div class="order-form" id="orderForm">
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
-            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST">
+            <form id="orderFormElement">
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
@@ -515,26 +529,24 @@
                     </select>
                 </div>
 
-                <!-- УСІ ПОЛЯ ДОСТАВКИ — ВІДКРИТІ ЗАВЖДИ -->
-                <div class="delivery-fields">
+                <!-- ПОЛЯ АДРЕСИ — ЗАВЖДИ ВИДИМІ -->
+                <div class="address-fields">
+                    <h4 style="margin-bottom: 15px; color: #d4a373;">Адреса доставки</h4>
                     <div class="form-group">
-                        <label>Населений пункт *</label>
-                        <input type="text" name="city" required />
+                        <label>Населений пункт</label>
+                        <input type="text" name="city" placeholder="Наприклад: Київ" />
                     </div>
-
                     <div class="form-group">
-                        <label>Номер відділення (Нова Пошта)</label>
-                        <input type="text" name="branch_nova" placeholder="Тільки для Нової Пошти" />
+                        <label>Відділення / Індекс</label>
+                        <input type="text" name="branch" placeholder="Наприклад: №15 або 01001" />
                     </div>
-
                     <div class="form-group">
-                        <label>Індекс (Укрпошта)</label>
-                        <input type="text" name="index_ukr" placeholder="Тільки для Укрпошти" />
+                        <label>Вулиця</label>
+                        <input type="text" name="street" placeholder="Наприклад: Хрещатик" />
                     </div>
-
                     <div class="form-group">
-                        <label>Адреса відділення (Укрпошта)</label>
-                        <input type="text" name="address_ukr" placeholder="Тільки для Укрпошти" />
+                        <label>Будинок / Квартира</label>
+                        <input type="text" name="house" placeholder="Наприклад: 25, кв. 12" />
                     </div>
                 </div>
 
@@ -553,12 +565,10 @@
 
                 <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
-
                 <button type="submit" class="submit-btn">Відправити замовлення</button>
+                <div class="success-message" id="successMessage">
+                    Дякуємо! Ваше замовлення отримано. Ми зв'яжемося з вами.
+                </div>
             </form>
         </div>
     </div>
@@ -700,6 +710,9 @@
         const incBtn = document.getElementById('inc');
         const decBtn = document.getElementById('dec');
         const totalPriceEl = document.getElementById('totalPrice');
+        const deliverySelect = document.getElementById('delivery');
+        const novaFields = document.getElementById('novaFields');
+        const ukrFields = document.getElementById('ukrFields');
 
         const PRICE_PER_ITEM = 250;
 
@@ -725,6 +738,16 @@
             const total = qty * PRICE_PER_ITEM;
             totalPriceEl.textContent = `Сума: ${total} грн`;
         }
+
+        deliverySelect.addEventListener('change', () => {
+            novaFields.classList.remove('active');
+            ukrFields.classList.remove('active');
+            if (deliverySelect.value === 'nova') {
+                novaFields.classList.add('active');
+            } else if (deliverySelect.value === 'ukr') {
+                ukrFields.classList.add('active');
+            }
+        });
 
         updateTotal();
         quantityInput.addEventListener('input', updateTotal);
