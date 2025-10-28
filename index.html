@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <script src="https://unpkg.com/@novapost/api@1.0.1/dist/novapost-api.min.js"></script>
-    <script src="https://unpkg.com/ukrposhta-autocomplete@1.0.0/dist/ukrposhta-autocomplete.min.js"></script>
     <style>
         /* === Основні стилі === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +16,6 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
@@ -257,6 +254,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
         .order-form.active { display: block; animation: fadeIn 0.6s; }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -300,6 +298,17 @@
             border: none;
             font-size: 1.2rem;
             font-weight: 600;
+        }
+
+        /* Поля доставки — завжди видимі */
+        .delivery-fields {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        .delivery-fields .form-group {
+            margin-bottom: 15px;
         }
 
         .total-price {
@@ -380,13 +389,6 @@
             .price { font-size: 2.5rem; }
             .section-title { font-size: 1.7rem; }
             .carousel { max-width: 300px; }
-            .order-form { padding: 25px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 1.6rem; }
-            .price { font-size: 2.2rem; }
-            .buy-btn, .submit-btn { font-size: 1rem; padding: 12px 24px; }
         }
     </style>
 </head>
@@ -396,7 +398,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">Vuse Go 1000</div>
-            <div class="burger" id="burger">Menu</div>
+            <div class="burger" id="burger">☰</div>
         </div>
     </header>
 
@@ -420,8 +422,8 @@
 
             <!-- Карусель -->
             <div class="carousel" id="carousel">
-                <button class="carousel-btn prev" id="prev">Left Arrow</button>
-                <button class="carousel-btn next" id="next">Right Arrow</button>
+                <button class="carousel-btn prev" id="prev">‹</button>
+                <button class="carousel-btn next" id="next">›</button>
                 <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
                         <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse Go 1000" />
@@ -513,31 +515,27 @@
                     </select>
                 </div>
 
-                <!-- Постійні поля для всіх типів доставки -->
-                <div class="form-group">
-                    <label>Населений пункт *</label>
-                    <input type="text" id="city" name="city" required placeholder="Почніть вводити..." />
-                </div>
+                <!-- УСІ ПОЛЯ ДОСТАВКИ — ВІДКРИТІ ЗАВЖДИ -->
+                <div class="delivery-fields">
+                    <div class="form-group">
+                        <label>Населений пункт *</label>
+                        <input type="text" name="city" required />
+                    </div>
 
-                <div class="form-group">
-                    <label>Вулиця *</label>
-                    <input type="text" name="street" required placeholder="Введіть вулицю" />
-                </div>
+                    <div class="form-group">
+                        <label>Номер відділення (Нова Пошта)</label>
+                        <input type="text" name="branch_nova" placeholder="Тільки для Нової Пошти" />
+                    </div>
 
-                <!-- Додаткові поля для Нової Пошти -->
-                <div class="form-group" id="novaBranchGroup" style="display: none;">
-                    <label>Номер відділення</label>
-                    <input type="text" id="novaBranch" name="branch_nova" placeholder="Оберіть відділення..." />
-                </div>
+                    <div class="form-group">
+                        <label>Індекс (Укрпошта)</label>
+                        <input type="text" name="index_ukr" placeholder="Тільки для Укрпошти" />
+                    </div>
 
-                <!-- Додаткові поля для Укрпошти -->
-                <div class="form-group" id="ukrIndexGroup" style="display: none;">
-                    <label>Індекс</label>
-                    <input type="text" id="ukrIndex" name="index_ukr" />
-                </div>
-                <div class="form-group" id="ukrAddressGroup" style="display: none;">
-                    <label>Адреса відділення</label>
-                    <input type="text" id="ukrAddress" name="address_ukr" placeholder="Оберіть відділення..." />
+                    <div class="form-group">
+                        <label>Адреса відділення (Укрпошта)</label>
+                        <input type="text" name="address_ukr" placeholder="Тільки для Укрпошти" />
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -573,13 +571,13 @@
                 <p>Оберіть зручний спосіб зв'язку:</p>
                 <div class="contact-btns">
                     <a href="https://t.me/+380953804630" target="_blank" class="contact-btn">
-                        Telegram
+                        <i class="fab fa-telegram"></i> Telegram
                     </a>
                     <a href="viber://chat?number=+380953804630" class="contact-btn">
-                        Viber
+                        <i class="fab fa-viber"></i> Viber
                     </a>
                     <a href="https://wa.me/380953804630" target="_blank" class="contact-btn">
-                        WhatsApp
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
             </div>
@@ -702,14 +700,6 @@
         const incBtn = document.getElementById('inc');
         const decBtn = document.getElementById('dec');
         const totalPriceEl = document.getElementById('totalPrice');
-        const deliverySelect = document.getElementById('delivery');
-        const novaBranchGroup = document.getElementById('novaBranchGroup');
-        const ukrIndexGroup = document.getElementById('ukrIndexGroup');
-        const ukrAddressGroup = document.getElementById('ukrAddressGroup');
-        const cityInput = document.getElementById('city');
-        const novaBranchInput = document.getElementById('novaBranch');
-        const ukrAddressInput = document.getElementById('ukrAddress');
-        const ukrIndexInput = document.getElementById('ukrIndex');
 
         const PRICE_PER_ITEM = 250;
 
@@ -736,81 +726,6 @@
             totalPriceEl.textContent = `Сума: ${total} грн`;
         }
 
-        // === Автодоповнення міст (Nova Poshta + Ukrposhta) ===
-        let npAutocomplete, upAutocomplete;
-
-        cityInput.addEventListener('input', function () {
-            const query = this.value.trim();
-            if (query.length < 2) return;
-
-            // Nova Poshta
-            if (window.NovaPoshta) {
-                if (!npAutocomplete) {
-                    npAutocomplete = new NovaPoshta.CityAutocomplete(cityInput, {
-                        apiKey: 'YOUR_NP_API_KEY', // Замініть на реальний ключ або залиште порожнім для демо
-                        onSelect: (city) => {
-                            cityInput.value = city.Present;
-                        }
-                    });
-                }
-                npAutocomplete.search(query);
-            }
-
-            // Ukrposhta
-            if (window.UkrposhtaAutocomplete) {
-                if (!upAutocomplete) {
-                    upAutocomplete = new UkrposhtaAutocomplete.CityAutocomplete(cityInput, {
-                        onSelect: (city) => {
-                            cityInput.value = city.name;
-                        }
-                    });
-                }
-                upAutocomplete.search(query);
-            }
-        });
-
-        // === Показ додаткових полів залежно від доставки ===
-        deliverySelect.addEventListener('change', () => {
-            const val = deliverySelect.value;
-            novaBranchGroup.style.display = val === 'nova' ? 'block' : 'none';
-            ukrIndexGroup.style.display = val === 'ukr' ? 'block' : 'none';
-            ukrAddressGroup.style.display = val === 'ukr' ? 'block' : 'none';
-
-            if (val === 'nova') {
-                initNovaBranchAutocomplete();
-            } else if (val === 'ukr') {
-                initUkrAddressAutocomplete();
-            }
-        });
-
-        function initNovaBranchAutocomplete() {
-            if (!cityInput.value) return;
-            if (window.NovaPoshta && !novaBranchInput.dataset.initialized) {
-                new NovaPoshta.WarehouseAutocomplete(novaBranchInput, {
-                    city: cityInput.value,
-                    onSelect: (warehouse) => {
-                        novaBranchInput.value = warehouse.Description;
-                    }
-                });
-                novaBranchInput.dataset.initialized = 'true';
-            }
-        }
-
-        function initUkrAddressAutocomplete() {
-            if (!cityInput.value) return;
-            if (window.UkrposhtaAutocomplete && !ukrAddressInput.dataset.initialized) {
-                new UkrposhtaAutocomplete.PostOfficeAutocomplete(ukrAddressInput, {
-                    city: cityInput.value,
-                    onSelect: (office) => {
-                        ukrAddressInput.value = office.address;
-                        ukrIndexInput.value = office.postcode;
-                    }
-                });
-                ukrAddressInput.dataset.initialized = 'true';
-            }
-        }
-
-        // Початкове оновлення
         updateTotal();
         quantityInput.addEventListener('input', updateTotal);
     </script>
