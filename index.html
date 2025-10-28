@@ -508,98 +508,105 @@
         </div>
     </section>
 
-    <!-- Форма замовлення -->
-    <div class="order-form" id="orderForm">
-        <div class="container">
-            <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
 
-            <!-- Повідомлення -->
-            <div id="formMessage" class="form-message"></div>
+<!-- Форма замовлення -->
+<div class="order-form" id="orderForm">
+    <div class="container">
+        <h2 class="section-title" style="margin-bottom: 20px;">Оформлення замовлення</h2>
 
-            <form id="orderSubmitForm" action="https://formsubmit.co/astrajker@gmail.com" method="POST" onsubmit="return handleSubmit(this)">
-                <div class="form-group quantity">
-                    <button type="button" id="dec">-</button>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1" readonly />
-                    <button type="button" id="inc">+</button>
-                    <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
-                </div>
+        <!-- Повідомлення -->
+        <div id="formMessage" class="form-message" style="display:none;"></div>
 
+        <form 
+            action="https://formspree.io/f/xwpwlnkz" 
+            method="POST" 
+            onsubmit="return handleSubmit(this)"
+        >
+            <div class="form-group quantity">
+                <button type="button" id="dec">-</button>
+                <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
+                <button type="button" id="inc">+</button>
+                <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
+            </div>
+
+            <div class="form-group">
+                <label>Ім'я *</label>
+                <input type="text" name="Ім'я" required />
+            </div>
+            <div class="form-group">
+                <label>Прізвище *</label>
+                <input type="text" name="Прізвище" required />
+            </div>
+            <div class="form-group">
+                <label>Номер телефону *</label>
+                <input type="tel" name="Телефон" required />
+            </div>
+
+            <div class="form-group">
+                <label>Доставка *</label>
+                <select name="Доставка" id="delivery" required>
+                    <option value="">Оберіть спосіб</option>
+                    <option value="Нова Пошта">Нова Пошта</option>
+                    <option value="Укрпошта">Укрпошта</option>
+                </select>
+            </div>
+
+            <!-- Нова Пошта -->
+            <div class="dynamic-fields" id="novaFields">
                 <div class="form-group">
-                    <label>Ім'я *</label>
-                    <input type="text" name="name" required />
+                    <label>Населений пункт</label>
+                    <input type="text" name="Місто (Нова Пошта)" />
                 </div>
                 <div class="form-group">
-                    <label>Прізвище *</label>
-                    <input type="text" name="surname" required />
+                    <label>Номер відділення</label>
+                    <input type="text" name="Відділення (Нова Пошта)" />
+                </div>
+            </div>
+
+            <!-- Укрпошта -->
+            <div class="dynamic-fields" id="ukrFields">
+                <div class="form-group">
+                    <label>Населений пункт</label>
+                    <input type="text" name="Місто (Укрпошта)" />
                 </div>
                 <div class="form-group">
-                    <label>Номер телефону *</label>
-                    <input type="tel" name="phone" required />
+                    <label>Індекс</label>
+                    <input type="text" name="Індекс (Укрпошта)" />
                 </div>
-
                 <div class="form-group">
-                    <label>Доставка *</label>
-                    <select name="delivery" id="delivery" required>
-                        <option value="">Оберіть спосіб</option>
-                        <option value="nova">Нова Пошта</option>
-                        <option value="ukr">Укрпошта</option>
-                    </select>
+                    <label>Адреса відділення</label>
+                    <input type="text" name="Адреса (Укрпошта)" />
                 </div>
+            </div>
 
-                <div class="dynamic-fields" id="novaFields">
-                    <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="city_nova" />
-                    </div>
-                    <div class="form-group">
-                        <label>Номер відділення</label>
-                        <input type="text" name="branch_nova" />
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Оплата *</label>
+                <select name="Оплата" required>
+                    <option value="">Оберіть спосіб</option>
+                    <option value="На карту">На карту</option>
+                    <option value="IBAN">IBAN</option>
+                    <option value="USDT">USDT</option>
+                    <option value="Binance Pay">Binance Pay</option>
+                    <option value="Bybit Pay">Bybit Pay</option>
+                    <option value="OKX Pay">OKX Pay</option>
+                </select>
+            </div>
 
-                <div class="dynamic-fields" id="ukrFields">
-                    <div class="form-group">
-                        <label>Населений пункт</label>
-                        <input type="text" name="city_ukr" />
-                    </div>
-                    <div class="form-group">
-                        <label>Індекс</label>
-                        <input type="text" name="index_ukr" />
-                    </div>
-                    <div class="form-group">
-                        <label>Адреса відділення</label>
-                        <input type="text" name="address_ukr" />
-                    </div>
-                </div>
+            <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <div class="form-group">
-                    <label>Оплата *</label>
-                    <select name="payment" required>
-                        <option value="">Оберіть спосіб</option>
-                        <option value="card">На карту</option>
-                        <option value="iban">IBAN</option>
-                        <option value="usdt">USDT</option>
-                        <option value="binance">Binance Pay</option>
-                        <option value="bybit">Bybit Pay</option>
-                        <option value="okx">OKX Pay</option>
-                    </select>
-                </div>
+            <!-- Приховані поля -->
+            <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
+            <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
+            <input type="hidden" name="_next" value="thanks.html" />
 
-                <div class="total-price" id="totalPrice">Сума: 250 грн</div>
-
-                <input type="hidden" name="product" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="thanks.html" />
-
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">Відправити замовлення</span>
-                    <span class="btn-loading">Відправка...</span>
-                </button>
-            </form>
-        </div>
+            <button type="submit" class="submit-btn">
+                <span class="btn-text">Відправити замовлення</span>
+                <span class="btn-loading" style="display:none;">Відправка...</span>
+            </button>
+        </form>
     </div>
-
+</div>
+    
     <!-- Контакти -->
     <section id="contact">
         <div class="container">
