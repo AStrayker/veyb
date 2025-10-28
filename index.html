@@ -708,7 +708,8 @@
             const name = document.getElementById('name').value;
             const surname = document.getElementById('surname').value;
             const phone = document.getElementById('phone').value;
-            const delivery = document.getElementById('delivery').value;
+            const deliverySelect = document.getElementById('delivery');
+            const delivery = deliverySelect.options[deliverySelect.selectedIndex].text;
             const city = document.getElementById('city').value;
             const address = document.getElementById('address').value;
             const payment = document.getElementById('payment').value;
