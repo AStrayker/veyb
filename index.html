@@ -3,405 +3,185 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 10001 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* === Основні стилі === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9fb;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-        a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
-
+        body { font-family: 'Montserrat', sans-serif; background: #f9f9fb; color: #333; line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* === Хедер === */
         header {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-        .logo {
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: #d4a373;
-        }
-        .burger {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #d4a373;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-weight: 700; font-size: 1.4rem; color: #d4a373; }
+        .burger { display: none; font-size: 1.8rem; cursor: pointer; color: #d4a373; }
 
-        /* === Мобільне меню === */
         .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: #fff;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 999;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
+            position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+            background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 999;
+            padding: 80px 20px 20px; overflow-y: auto;
         }
         .mobile-menu.open { right: 0; }
         .mobile-menu ul { list-style: none; }
         .mobile-menu li { margin-bottom: 20px; }
         .mobile-menu a {
-            display: block;
-            padding: 12px 0;
-            font-weight: 500;
-            font-size: 1.1rem;
-            color: #333;
-            border-bottom: 1px solid #eee;
-            transition: color 0.3s;
+            display: block; padding: 12px 0; font-weight: 500; font-size: 1.1rem;
+            color: #333; border-bottom: 1px solid #eee; transition: color 0.3s;
         }
         .mobile-menu a:hover { color: #d4a373; }
 
         .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 998;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
         }
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* === Hero === */
-        .hero {
-            padding-top: 80px;
-            text-align: center;
-            padding-bottom: 60px;
-            background: linear-gradient(135deg, #fffaf0 0%, #f5f5f5 100%);
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #333;
-            animation: fadeInDown 1s ease-out;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-            opacity: 0;
-        }
+        .hero { padding-top: 80px; text-align: center; padding-bottom: 60px;
+            background: linear-gradient(135deg, #fffaf0 0%, #f5f5f5 100%); }
+        .hero h1 { font-size: 2.2rem; margin-bottom: 15px; color: #333; }
+        .hero p { font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto 30px; }
 
-        /* === Карусель === */
         .carousel {
-            position: relative;
-            max-width: 400px;
-            margin: 40px auto;
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            animation: fadeIn 1.5s ease-out;
+            position: relative; max-width: 400px; margin: 40px auto;
+            overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .carousel-item {
-            min-width: 100%;
-        }
-        .carousel-item img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+        .carousel-inner { display: flex; transition: transform 0.5s ease; }
+        .carousel-item { min-width: 100%; }
+        .carousel-item img { width: 100%; height: auto; object-fit: cover; }
         .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.8);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: all 0.3s;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.8); border: none; width: 44px; height: 44px;
+            border-radius: 50%; font-size: 1.5rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; transition: all 0.3s;
         }
         .carousel-btn:hover { background: #d4a373; color: white; }
         .prev { left: 15px; }
         .next { right: 15px; }
 
-        /* === Секції === */
-        section {
-            padding: 80px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        section.visible { opacity: 1; transform: translateY(0); }
+        section { padding: 80px 0; }
         .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #333;
-            position: relative;
+            text-align: center; font-size: 2rem; margin-bottom: 40px;
+            color: #333; position: relative;
         }
         .section-title::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background: #d4a373;
-            display: block;
-            margin: 15px auto 0;
-            border-radius: 2px;
+            content: ''; width: 60px; height: 3px; background: #d4a373;
+            display: block; margin: 15px auto 0; border-radius: 2px;
         }
 
-        /* === Ціна === */
         .price-section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background: #fff; border-radius: 16px; padding: 40px;
+            max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             text-align: center;
         }
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #d4a373;
-            margin: 20px 0;
-        }
+        .price { font-size: 3rem; font-weight: 700; color: #d4a373; margin: 20px 0; }
         .buy-btn {
-            background: #d4a373;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
+            background: #d4a373; color: white; border: none;
+            padding: 14px 32px; font-size: 1.1rem; font-weight: 600;
+            border-radius: 50px; cursor: pointer; transition: all 0.3s;
             margin-top: 20px;
         }
         .buy-btn:hover {
-            background: #c6935e;
-            transform: translateY(-3px);
+            background: #c6935e; transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
         }
 
-        /* === Опис === */
-        .description {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #555;
-        }
+        .description { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #555; }
 
-        /* === Доставка та оплата === */
         .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; max-width: 1000px; margin: 0 auto;
         }
         .info-card {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
+            background: white; padding: 30px; border-radius: 16px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
-        .info-card h3 {
-            color: #d4a373;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
+        .info-card h3 { color: #d4a373; margin-bottom: 15px; font-size: 1.4rem; }
 
-        /* === Форма === */
+        /* ФОРМА — ПОЧАТКОВО ПРИХОВАНА */
         .order-form {
-            display: none;
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            max-width: 600px;
-            margin: 40px auto;
+            display: none; background: white; padding: 40px;
+            border-radius: 16px; max-width: 600px; margin: 40px auto;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
-        .order-form.active { display: block; animation: fadeIn 0.6s; }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
         input, select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s;
+            width: 100%; padding: 12px 16px; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 1rem; transition: border 0.3s;
         }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #d4a373;
-        }
+        input:focus, select:focus { outline: none; border-color: #d4a373; }
         .quantity {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            display: flex; align-items: center; gap: 15px;
         }
         .quantity button {
-            width: 40px;
-            height: 40px;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
+            width: 40px; height: 40px; background: #f0f0f0;
+            border: none; border-radius: 50%; font-size: 1.2rem;
+            cursor: pointer; transition: all 0.3s;
         }
         .quantity button:hover { background: #d4a373; color: white; }
         .quantity input {
-            width: 60px;
-            text-align: center;
-            border: none;
-            font-size: 1.2rem;
-            font-weight: 600;
+            width: 60px; text-align: center; border: none;
+            font-size: 1.2rem; font-weight: 600;
         }
 
-        .dynamic-fields { display: none; margin-top: 15px; }
-        .dynamic-fields.active { display: block; animation: fadeIn 0.4s; }
+        /* ПОЛЯ АДРЕСИ — ЗАВЖДИ ВИДИМІ */
+        .address-fields {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
 
         .total-price {
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-align: center;
-            margin: 25px 0;
-            color: #d4a373;
+            font-size: 1.3rem; font-weight: 600; text-align: center;
+            margin: 25px 0; color: #d4a373;
         }
-
         .submit-btn {
-            background: #d4a373;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
+            background: #d4a373; color: white; border: none;
+            padding: 14px 32px; font-size: 1.1rem; font-weight: 600;
+            border-radius: 50px; cursor: pointer; width: 100%;
             transition: all 0.3s;
         }
-        .submit-btn:hover {
-            background: #c6935e;
-            transform: translateY(-2px);
+        .submit12 .submit-btn:hover { background: #c6935e; transform: translateY(-2px); }
+        .success-message {
+            display: none; background: #d4edda; color: #155724;
+            padding: 15px; border-radius: 8px; text-align: center;
+            margin-top: 20px; border: 1px solid #c3e6cb;
         }
+        .success-message.active { display: block; }
 
-        /* === Контакти === */
-        .contacts {
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .contacts { text-align: center; max-width: 500px; margin: 0 auto; }
         .contact-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 25px;
+            display: flex; justify-content: center; gap: 20px;
+            flex-wrap: wrap; margin-top: 25px;
         }
         .contact-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f8f8f8;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s;
-            min-width: 140px;
-            justify-content: center;
+            display: flex; align-items: center; gap: 10px;
+            background: #f8f8f8; padding: 12px 20px; border-radius: 50px;
+            font-weight: 500; transition: all 0.3s;
+            min-width: 140px; justify-content: center;
         }
-        .contact-btn:hover {
-            background: #d4a373;
-            color: white;
-            transform: translateY(-3px);
-        }
+        .contact-btn:hover { background: #d4a373; color: white; transform: translateY(-3px); }
         .contact-btn i { font-size: 1.3rem; }
 
-        /* === Футер === */
-        footer {
-            background: #333;
-            color: #ccc;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9rem;
-        }
+        footer { background: #333; color: #ccc; text-align: center; padding: 30px 20px; font-size: 0.9rem; }
 
-        /* === Анімації === */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* === Мобільні стилі === */
         @media (max-width: 768px) {
             .burger { display: block; }
             .hero h1 { font-size: 1.8rem; }
             .price { font-size: 2.5rem; }
             .section-title { font-size: 1.7rem; }
             .carousel { max-width: 300px; }
-        }
-
-        /* === Захист від перегляду на мобільному === */
-        @media (max-width: 480px) {
-            body::before {
-                content: "Цей сайт оптимізований для перегляду на комп'ютері. Рекомендуємо відкрити на ПК.";
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: #fff;
-                color: #333;
-                font-size: 1.1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                padding: 20px;
-                z-index: 9999;
-                line-height: 1.5;
-            }
-            body > *:not(::before) { display: none !important; }
         }
     </style>
 </head>
@@ -432,21 +212,13 @@
         <div class="container">
             <h1>Vuse Go 1000 Creamy Tobacco</h1>
             <p>1000 затяжок · Сливочно-кремовий смак · 250 грн</p>
-
-            <!-- Карусель -->
-            <div class="carousel" id="carousel">
-                <button class="carousel-btn prev" id="prev">Left Arrow</button>
-                <button class="carousel-btn next" id="next">Right Arrow</button>
+            <div class、政治 carousel" id="carousel">
+                <button class="carousel-btn prev" id="prev">Left</button>
+                <button class="carousel-btn next" id="next">Right</button>
                 <div class="carousel-inner" id="carouselInner">
-                    <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="Vuse Go 1000" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/2.webp?raw=true" alt="Vuse Go 1000" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://github.com/AStrayker/veyb/blob/main/3.webp?raw=true" alt="Vuse Go 1000" />
-                    </div>
+                    <div class="carousel-item"><img src="https://github.com/AStrayker/veyb/blob/main/1.webp?raw=true" alt="1" /></div>
+                    <div class="carousel-item"><img src="https://github.com/AStrayker/veyb/blob/main/2.webp?raw=true" alt="2" /></div>
+                    <div class="carousel-item"><img src="https://github.com/AStrayker/veyb/blob/main/3.webp?raw=true" alt="3" /></div>
                 </div>
             </div>
         </div>
@@ -494,7 +266,6 @@
         </div>
     </section>
 
-    <!-- Форма замовлення -->
     <!-- Форма замовлення -->
     <div class="order-form" id="orderForm">
         <div class="container">
@@ -580,15 +351,9 @@
             <div class="contacts">
                 <p>Оберіть зручний спосіб зв'язку:</p>
                 <div class="contact-btns">
-                    <a href="https://t.me/+380953804630" target="_blank" class="contact-btn">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="viber://chat?number=+380953804630" class="contact-btn">
-                        <i class="fab fa-viber"></i> Viber
-                    </a>
-                    <a href="https://wa.me/380953804630" target="_blank" class="contact-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                    <a href="https://t.me/+380953804630" target="_blank" class="contact-btn">Telegram</a>
+                    <a href="viber://chat?number=+380953804630" class="contact-btn">Viber</a>
+                    <a href="https://wa.me/380953804630" target="_blank" class="contact-btn">WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -602,155 +367,99 @@
     </footer>
 
     <script>
-        // === Мобільне меню ===
-        const burger = document.getElementById('burger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        const navLinks = document.querySelectorAll('.nav-link');
+        document.addEventListener('DOMContentLoaded', () => {
+            const openFormBtn = document.getElementById('openForm');
+            const orderForm = document.getElementById('orderForm');
 
-        burger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
+            openFormBtn.addEventListener('click', () => {
+                orderForm.style.display = 'block';
+                orderForm.scrollIntoView({ behavior: 'smooth' });
 
-        overlay.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            overlay.classList.remove('active');
-        });
+                // ІНІЦІАЛІЗАЦІЯ ФОРМИ
+                const quantityInput = document.getElementById('quantity');
+                const incBtn = document.getElementById('inc');
+                const decBtn = document.getElementById('dec');
+                const totalPriceEl = document.getElementById('totalPrice');
+                const form = document.getElementById('orderFormElement');
+                const successMessage = document.getElementById('successMessage');
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            });
-        });
+                const PRICE_PER_ITEM = 250;
 
-        // === Свайп меню ===
-        let startX = 0;
-        document.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
+                incBtn.onclick = () => {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                    updateTotal();
+                };
+                decBtn.onclick = () => {
+                    if (quantityInput.value > 1) {
+                        quantityInput.value = parseInt(quantityInput.value) - 1;
+                        updateTotal();
+                    }
+                };
 
-        document.addEventListener('touchmove', e => {
-            if (!startX) return;
-            let diffX = e.touches[0].clientX - startX;
-            if (diffX > 80) {
-                mobileMenu.classList.add('open');
-                overlay.classList.add('active');
-            } else if (diffX < -80 && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                overlay.classList.remove('active');
-            }
-        }, { passive: true });
-
-        // === Плавний скрол ===
-        navLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // === Анімація при скролі ===
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                function updateTotal() {
+                    const qty = parseInt(quantityInput.value) || 1;
+                    totalPriceEl.textContent = `Сума: ${qty * PRICE_PER_ITEM} грн`;
                 }
-            });
-        }, { threshold: 0.1 });
 
-        sections.forEach(section => observer.observe(section));
+                form.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const data = Object.fromEntries(new FormData(form));
+                    data.product = "Vuse Go 1000 Creamy Tobacco";
+                    data.total = `${parseInt(data.quantity) * 250} грн`;
 
-        // === Карусель ===
-        const carouselInner = document.getElementById('carouselInner');
-        const prevBtn = document.getElementById('prev');
-        const nextBtn = document.getElementById('next');
-        let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
+                    try {
+                        const res = await fetch('https://formspree.io/f/xwpwlnkz', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+                        if (res.ok) {
+                            successMessage.style.display = 'block';
+                            form.reset();
+                            quantityInput.value = 1;
+                            updateTotal();
+                        } else {
+                            alert('Помилка відправки. Спробуйте ще раз.');
+                        }
+                    } catch (err) {
+                        alert('Помилка мережі.');
+                    }
+                };
 
-        function updateCarousel() {
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        });
-
-        // Свайп каруселі
-        let carouselStartX = 0;
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => {
-            carouselStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', e => {
-            if (!carouselStartX) return;
-            let diff = carouselStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) nextBtn.click();
-                else prevBtn.click();
-            }
-            carouselStartX = 0;
-        }, { passive: true });
-
-        // === Форма ===
-        const openFormBtn = document.getElementById('openForm');
-        const orderForm = document.getElementById('orderForm');
-        const quantityInput = document.getElementById('quantity');
-        const incBtn = document.getElementById('inc');
-        const decBtn = document.getElementById('dec');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const deliverySelect = document.getElementById('delivery');
-        const novaFields = document.getElementById('novaFields');
-        const ukrFields = document.getElementById('ukrFields');
-
-        const PRICE_PER_ITEM = 250;
-
-        openFormBtn.addEventListener('click', () => {
-            orderForm.classList.add('active');
-            orderForm.scrollIntoView({ behavior: 'smooth' });
-        });
-
-        incBtn.addEventListener('click', () => {
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            updateTotal();
-        });
-
-        decBtn.addEventListener('click', () => {
-            if (quantityInput.value > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
                 updateTotal();
-            }
+            });
+
+            // Мобільне меню
+            const burger = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            burger.onclick = () => {
+                mobileMenu.classList.toggle('open');
+                overlay.classList.toggle('active');
+            };
+            overlay.onclick = () => {
+                mobileMenu.classList.remove('open');
+                overlay.classList.remove('active');
+            };
+            navLinks.forEach(l => l.onclick = () => {
+                mobileMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.querySelector(l.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Карусель
+            const carouselInner = document.getElementById('carouselInner');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            let idx = 0;
+            const items = document.querySelectorAll('.carousel-item');
+            const total = items.length;
+            const update = () => carouselInner.style.transform = `translateX(-${idx * 100}%)`;
+            prevBtn.onclick = () => { idx = (idx - 1 + total) % total; update(); };
+            nextBtn.onclick = () => { idx = (idx + 1) % total; update(); };
         });
-
-        function updateTotal() {
-            const qty = parseInt(quantityInput.value);
-            const total = qty * PRICE_PER_ITEM;
-            totalPriceEl.textContent = `Сума: ${total} грн`;
-        }
-
-        deliverySelect.addEventListener('change', () => {
-            novaFields.classList.remove('active');
-            ukrFields.classList.remove('active');
-            if (deliverySelect.value === 'nova') {
-                novaFields.classList.add('active');
-            } else if (deliverySelect.value === 'ukr') {
-                ukrFields.classList.add('active');
-            }
-        });
-
-        updateTotal();
-        quantityInput.addEventListener('input', updateTotal);
     </script>
 </body>
 </html>
