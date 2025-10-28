@@ -16,6 +16,7 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
@@ -421,7 +422,7 @@
     <!-- Hero -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>Vuse Go 1000 Creamy Tobacco</h1>
+            <h1>Vuse Go 10001 Creamy Tobacco</h1>
             <p>1000 затяжок · Сливочно-кремовий смак · 250 грн</p>
 
             <div class="carousel" id="carousel">
@@ -460,7 +461,7 @@
             <h2 class="section-title">Опис товару</h2>
             <div class="description">
                 <p><strong>Одноразовий вейп Vuse Go 1000 Creamy Tobacco</strong> поставляється з попередньо заправленим 2 мл електронної рідини зі сумішшю насиченого тютюнового смаку з нотками карамелі та солодкими, ароматними ванильними ароматами.</p>
-                <p style="margin-top: 20px;"><strong>Нове устройство Vuse GO 1000</strong> забезпечує більше затяжок, ніж інші наші одноразові пристрої Vuse. З Vuse GO 1000 користувачі тепер можуть насолоджуватися <strong>до 1000 затяжок</strong> з одного пристрою*.</p>
+                <p style="margin-top: 20px;"><strong>Нове устройство Vuse GO 1000</strong> забезпечує більше затяжок, ніж інші наші одноразові пристрої Vuse. З Vuse GO 1000 користувачі тепер можуть насолоджувалися <strong>до 1000 затяжок</strong> з одного пристрою*.</p>
                 <p style="margin-top: 20px;">Vuse GO 1000 — одноразова електронна сигарета, призначена для одноразового використання і <strong>не підлягає перезарядці</strong>.</p>
             </div>
         </div>
@@ -519,6 +520,7 @@
                         <option value="Нова Пошта">Нова Пошта</option>
                         <option value="Укрпошта">Укрпошта</option>
                     </select>
+                </div>
 
                 <div class="address-fields">
                     <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
@@ -534,7 +536,7 @@
 
                 <div class="form-group">
                     <label>Оплата *</label>
-<select id="payment" required>
+                    <select id="payment" required>
                         <option value="">Оберіть спосіб</option>
                         <option value="На карту">На карту</option>
                         <option value="IBAN">IBAN</option>
@@ -683,8 +685,8 @@
         }
 
         // === Telegram: НАЛАШТУВАННЯ ===
-        const BOT_TOKEN = '8435209606:AAF018rPlPPjm2FAbJkxEYYU735GqXXrHRA';  // ← ЗАМІНІТЬ!
-        const CHAT_ID = '282198872';  // ← ЗАМІНІТЬ!
+        const BOT_TOKEN = '8435209606:AAF018rPlPPjm2FAbJkxEYYU735GqXXrHRA';  // ← Ваш токен
+        const CHAT_ID = '313678478';  // ← Ваш chat_id
 
         // === Відправка в Telegram ===
         async function sendToTelegram(event) {
@@ -707,11 +709,18 @@
             const name = document.getElementById('name').value;
             const surname = document.getElementById('surname').value;
             const phone = document.getElementById('phone').value;
+
+            // ВИПРАВЛЕНО: Отримуємо ТЕКСТ опції
             const deliverySelect = document.getElementById('delivery');
             const delivery = deliverySelect.options[deliverySelect.selectedIndex].text;
+
             const city = document.getElementById('city').value;
             const address = document.getElementById('address').value;
-            const payment = document.getElementById('payment').value;
+
+            // ВИПРАВЛЕНО: Отримуємо ТЕКСТ опції
+            const paymentSelect = document.getElementById('payment');
+            const payment = paymentSelect.options[paymentSelect.selectedIndex].text;
+
             const total = quantity * 250 + ' грн';
 
             const message = `
