@@ -495,81 +495,78 @@
             <!-- Повідомлення -->
             <div id="formMessage" class="form-message"></div>
 
-            <form 
-                id="orderSubmitForm" 
-                action="https://formspree.io/f/xwpwlnkz" 
-                method="POST" 
-                onsubmit="return handleSubmit(this)"
-            >
-                <div class="form-group quantity">
-                    <button type="button" id="dec">-</button>
-                    <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
-                    <button type="button" id="inc">+</button>
-                    <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
-                </div>
+<form 
+    id="orderSubmitForm" 
+    action="https://formspree.io/f/xwpwlnkz" 
+    method="POST" 
+    onsubmit="return handleSubmit(this)"
+>
+    <div class="form-group quantity">
+        <button type="button" id="dec">-</button>
+        <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
+        <button type="button" id="inc">+</button>
+        <span style="margin-left: 20px; font-weight: 600;">Кількість</span>
+    </div>
 
-                <div class="form-group">
-                    <label>Ім'я *</label>
-                    <input type="text" name="Ім'я" required />
-                </div>
-                <div class="form-group">
-                    <label>Прізвище *</label>
-                    <input type="text" name="Прізвище" required />
-                </div>
-                <div class="form-group">
-                    <label>Номер телефону *</label>
-                    <input type="tel" name="Телефон" required />
-                </div>
+    <div class="form-group">
+        <label>Ім'я *</label>
+        <input type="text" name="Ім'я" required />
+    </div>
+    <div class="form-group">
+        <label>Прізвище *</label>
+        <input type="text" name="Прізвище" required />
+    </div>
+    <div class="form-group">
+        <label>Номер телефону *</label>
+        <input type="tel" name="Телефон" required />
+    </div>
 
-                <div class="form-group">
-                    <label>Доставка *</label>
-                    <select name="Доставка" required>
-                        <option value="">Оберіть спосіб</option>
-                        <option value="Нова Пошта">Нова Пошта</option>
-                        <option value="Укрпошта">Укрпошта</option>
-                    </select>
-                </div>
+    <div class="form-group">
+        <label>Доставка *</label>
+        <select name="Доставка" required>
+            <option value="">Оберіть спосіб</option>
+            <option value="Нова Пошта">Нова Пошта</option>
+            <option value="Укрпошта">Укрпошта</option>
+        </select>
+    </div>
 
-                <!-- АДРЕСА — ЗАВЖДИ ВИДИМА -->
-                <div class="address-fields">
-                    <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
-                    <div class="form-group">
-                        <label>Населений пункт *</label>
-                        <input type="text" name="Населений пункт" required placeholder="Наприклад: Київ" />
-                    </div>
-                    <div class="form-group">
-                        <label>Вулиця, будинок/квартира *</label>
-                        <input type="text" name="Вулиця, будинок/квартира" required placeholder="Наприклад: Хрещатик, 25, кв. 12" />
-                    </div>
-                </div>
+    <div class="address-fields">
+        <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
+        <div class="form-group">
+            <label>Населений пункт *</label>
+            <input type="text" name="Населений пункт" required placeholder="Наприклад: Київ" />
+        </div>
+        <div class="form-group">
+            <label>Вулиця, будинок/квартира *</label>
+            <input type="text" name="Вулиця, будинок/квартира" required placeholder="Наприклад: Хрещатик, 25, кв. 12" />
+        </div>
+    </div>
 
-                <div class="form-group">
-                    <label>Оплата *</label>
-                    <select name="Оплата" required>
-                        <option value="">Оберіть спосіб</option>
-                        <option value="На карту">На карту</option>
-                        <option value="IBAN">IBAN</option>
-                        <option value="USDT">USDT</option>
-                        <option value="Binance Pay">Binance Pay</option>
-                        <option value="Bybit Pay">Bybit Pay</option>
-                        <option value="OKX Pay">OKX Pay</option>
-                    </select>
-                </div>
+    <div class="form-group">
+        <label>Оплата *</label>
+        <select name="Оплата" required>
+            <option value="">Оберіть спосіб</option>
+            <option value="На карту">На карту</option>
+            <option value="IBAN">IBAN</option>
+            <option value="USDT">USDT</option>
+            <option value="Binance Pay">Binance Pay</option>
+            <option value="Bybit Pay">Bybit Pay</option>
+            <option value="OKX Pay">OKX Pay</option>
+        </select>
+    </div>
 
-                <div class="total-price" id="totalPrice">Сума: 250 грн</div>
+    <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-                <!-- ПРИХОВАНІ ПОЛЯ -->
-                <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
-                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-                
-                <!-- ПОВНА URL ДЛЯ ПЕРЕНАПРАВЛЕННЯ -->
-                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
+    <!-- ПРИХОВАНІ ПОЛЯ -->
+    <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
+    <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
+    <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
 
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">Відправити замовлення</span>
-                    <span class="btn-loading">Відправка...</span>
-                </button>
-            </form>
+    <button type="submit" class="submit-btn">
+        <span class="btn-text">Відправити замовлення</span>
+        <span class="btn-loading">Відправка...</span>
+    </button>
+</form>
         </div>
     </div>
 
