@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vuse Go 1000 Creamy Tobacco — 250 грн</title>
+    <title>Vuse Go 11000 Creamy Tobacco — 250 грн</title>
     <link rel="icon" href="https://github.com/AStrayker/veyb/blob/main/ico.png?raw=true" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -392,27 +392,10 @@
             .price { font-size: 2.5rem; }
             .section-title { font-size: 1.7rem; }
             .carousel { max-width: 300px; }
+            .order-form { padding: 30px 20px; }
         }
 
-        @media (max-width: 480px) {
-            body::before {
-                content: "Цей сайт оптимізований для перегляду на комп'ютері. Рекомендуємо відкрити на ПК.";
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: #fff;
-                color: #333;
-                font-size: 1.1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                padding: 20px;
-                z-index: 9999;
-                line-height: 1.5;
-            }
-            body > *:not(::before) { display: none !important; }
-        }
+        /* ЗАПРЕТ НА МОБІЛЬНІ ПРИСТРОЇ — ВИДАЛЕНО */
     </style>
 </head>
 <body>
@@ -512,12 +495,12 @@
             <!-- Повідомлення -->
             <div id="formMessage" class="form-message"></div>
 
-<form 
-    id="orderSubmitForm" 
-    action="https://formspree.io/f/xwpwlnkz" 
-    method="POST" 
-    onsubmit="return handleSubmit(this)"
->
+            <form 
+                id="orderSubmitForm" 
+                action="https://formspree.io/f/xwpwlnkz" 
+                method="POST" 
+                onsubmit="return handleSubmit(this)"
+            >
                 <div class="form-group quantity">
                     <button type="button" id="dec">-</button>
                     <input type="number" id="quantity" name="Кількість" value="1" min="1" readonly />
@@ -575,18 +558,18 @@
 
                 <div class="total-price" id="totalPrice">Сума: 250 грн</div>
 
-    <!-- ПРИХОВАНІ ПОЛЯ — ОНОВЛЕНІ -->
-    <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
-    <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
-    
-    <!-- ПОВНА URL ДЛЯ ПЕРЕНАПРАВЛЕННЯ -->
-    <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
+                <!-- ПРИХОВАНІ ПОЛЯ -->
+                <input type="hidden" name="Товар" value="Vuse Go 1000 Creamy Tobacco" />
+                <input type="hidden" name="_subject" value="Нове замовлення Vuse Go 1000" />
+                
+                <!-- ПОВНА URL ДЛЯ ПЕРЕНАПРАВЛЕННЯ -->
+                <input type="hidden" name="_next" value="https://astrayker.github.io/veyb/thanks.html" />
 
-    <button type="submit" class="submit-btn">
-        <span class="btn-text">Відправити замовлення</span>
-        <span class="btn-loading">Відправка...</span>
-    </button>
-</form>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Відправити замовлення</span>
+                    <span class="btn-loading">Відправка...</span>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -719,7 +702,7 @@
             }
             carouselStartX = 0;
         }, { passive: true });
-<input type="hidden" name="_gotcha" value="" style="display:none !important" />
+
         // === Відкриття форми ===
         const openFormBtn = document.getElementById('openForm');
         const orderForm = document.getElementById('orderForm');
