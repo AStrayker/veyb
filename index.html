@@ -687,47 +687,34 @@
         const BOT_TOKEN = '8435209606:AAF018rPlPPjm2FAbJkxEYYU735GqXXrHRA';  // ← ЗАМІНІТЬ!
         const CHAT_ID = '282198872';  // ← ЗАМІНІТЬ!
 
-// === Відправка в Telegram ===
-async function sendToTelegram(event) {
-    event.preventDefault();
+        // === Відправка в Telegram ===
+        async function sendToTelegram(event) {
+            event.preventDefault();
 
-    const form = event.target;
-    if (!form.checkValidity()) {
-        showMessage('Заповніть всі обов\'язкові поля!', 'error');
-        return false;
-    }
+            const form = event.target;
+            if (!form.checkValidity()) {
+                showMessage('Заповніть всі обов\'язкові поля!', 'error');
+                return false;
+            }
 
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = submitBtn.querySelector('.btn-text');
-    const btnLoading = submitBtn.querySelector('.btn-loading');
-    btnText.style.display = 'none';
-    btnLoading.style.display = 'inline';
-    submitBtn.disabled = true;
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
 
-    // ЗБИРАЄМО ДАНІ
-    const quantity = document.getElementById('quantity').value;
-    const name = document.getElementById('name').value;
-    const surname = document.getElementById('surname').value;
-    const phone = document.getElementById('phone').value;
-    
-    // КРИТИЧНО: ЧИТАЄМО value ПІСЛЯ change
-    const delivery = document.getElementById('delivery').value;
-    const payment = document.getElementById('payment').value;
-    
-    const city = document.getElementById('city').value;
-    const address = document.getElementById('address').value;
-    const total = quantity * 250 + ' грн';
+            const quantity = document.getElementById('quantity').value;
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const phone = document.getElementById('phone').value;
+            const delivery = document.getElementById('delivery').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+            const payment = document.getElementById('payment').value;
+            const total = quantity * 250 + ' грн';
 
-    // ПЕРЕВІРКА НА undefined
-    if (!delivery || delivery === '') {
-        showMessage('Оберіть спосіб доставки!', 'error');
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
-        submitBtn.disabled = false;
-        return false;
-    }
-
-    const message = `
+            const message = `
 Нове замовлення Vuse Go 1000
 
 Клієнт: ${name} ${surname}
@@ -740,31 +727,30 @@ async function sendToTelegram(event) {
 Кількість: ${quantity} шт.
 Сума: ${total}
 
-#vuse #order
-    `.trim();
+            `.trim();
 
-    try {
-        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=HTML`;
-        const response = await fetch(url);
-        if (response.ok) {
-            showMessage('Замовлення відправлено! Ми зв\'яжемося з вами.', 'success');
-            form.reset();
-            updateTotal();
-            setTimeout(() => {
-                window.location.href = 'thanks.html';
-            }, 2000);
-        } else {
-            throw new Error('Telegram API error');
+            try {
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=HTML`;
+                const response = await fetch(url);
+                if (response.ok) {
+                    showMessage('Замовлення відправлено! Ми зв\'яжемося з вами.', 'success');
+                    form.reset();
+                    updateTotal();
+                    setTimeout(() => {
+                        window.location.href = 'thanks.html';
+                    }, 2000);
+                } else {
+                    throw new Error('Telegram API error');
+                }
+            } catch (error) {
+                showMessage('Помилка відправки. Спробуйте ще раз.', 'error');
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+
+            return false;
         }
-    } catch (error) {
-        showMessage('Помилка відправки. Спробуйте ще раз.', 'error');
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
-        submitBtn.disabled = false;
-    }
-
-    return false;
-}
 
         function showMessage(text, type) {
             const messageEl = document.getElementById('formMessage');
