@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         /* === Основні стилі === */
+
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -379,6 +381,27 @@
             padding: 30px 20px;
             font-size: 0.9rem;
         }
+      .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+.toggle-btn {
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+.toggle-btn.active {
+    border-color: #d4a373;
+    background: #d4a373;
+    color: white;
+}
 
         /* === Анімації === */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -512,14 +535,14 @@
                     <input type="tel" id="phone" required />
                 </div>
 
-                <div class="form-group">
-                    <label>Доставка *</label>
-                    <select id="delivery" name="delivery" required>
-                        <option value="">Оберіть спосіб</option>
-                        <option value="Нова Пошта">Нова Пошта</option>
-                        <option value="Укрпошта">Укрпошта</option>
-                    </select>
-                </div>
+<div class="form-group">
+    <label>Доставка *</label>
+    <div class="btn-group">
+        <button type="button" class="toggle-btn" data-value="Нова Пошта">Нова Пошта</button>
+        <button type="button" class="toggle-btn" data-value="Укрпошта">Укрпошта</button>
+    </div>
+    <input type="hidden" id="delivery" name="delivery" required />
+</div>
 
                 <div class="address-fields">
                     <h4 style="margin: 15px 0 10px; color: #d4a373;">Адреса доставки</h4>
@@ -670,6 +693,18 @@
             quantityInput.value = parseInt(quantityInput.value) + 1;
             updateTotal();
         });
+      
+      // Кнопки доставки
+const deliveryBtns = document.querySelectorAll('.toggle-btn');
+const deliveryInput = document.getElementById('delivery');
+
+deliveryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        deliveryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        deliveryInput.value = btn.dataset.value;
+    });
+});
 
         decBtn.addEventListener('click', () => {
             if (quantityInput.value > 1) {
