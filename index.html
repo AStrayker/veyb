@@ -299,6 +299,18 @@
             font-weight: 600;
         }
 
+        // Додай після визначення quantityInput, incBtn тощо
+const deliverySelect = document.getElementById('delivery');
+const paymentSelect = document.getElementById('payment');
+
+// Синхронізуємо value при зміні
+deliverySelect.addEventListener('change', () => {
+    deliverySelect.value = deliverySelect.options[deliverySelect.selectedIndex].value;
+});
+paymentSelect.addEventListener('change', () => {
+    paymentSelect.value = paymentSelect.options[paymentSelect.selectedIndex].value;
+});
+        
         .total-price {
             font-size: 1.3rem;
             font-weight: 600;
