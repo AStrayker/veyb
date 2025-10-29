@@ -796,19 +796,18 @@ async function sendToTelegram(event) {
     }
 
     const message = `
-Нове замовлення Vuse Go 1000
+🛎Нове замовлення Vuse Go 1000
+______________________________
+👤Клієнт: ${name} ${surname}
+📱Телефон: ${phone}
+📲Месенджер: ${contactMethod}
 
-Клієнт: ${name} ${surname}
-Телефон: ${phone}
-Месенджер: ${contactMethod}
+📦Доставка: ${delivery}
+📍Адреса: ${city}, ${address}
 
-Доставка: ${delivery}
-Адреса: ${city}, ${address}
-
-Оплата: ${payment}
-Зв’язок: ${contactMethod}
-Кількість: ${quantity} шт.
-Сума: ${total}
+💳Оплата: ${payment}
+📎Кількість: ${quantity} шт.
+💰Сума: ${total}
 
 #vuse #order
     `.trim();
